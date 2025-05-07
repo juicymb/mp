@@ -223,11 +223,11 @@ bool IsVPNEnabled() {
     }
 } */
 
-/*
+
 bool FileExists(const std::string& filename) {
     std::ifstream file(filename);
     return file.good();
-} */
+}
 
 void eglSwapBuffers_handler(RegisterContext * ctx, const HookEntryInfo * info)
 {
