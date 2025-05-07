@@ -221,7 +221,7 @@ bool IsVPNEnabled() {
         env->DeleteLocalRef(connectivity);
         return false;
     }
-} */
+}
 
 
 bool FileExists(const std::string& filename) {
