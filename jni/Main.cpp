@@ -252,13 +252,12 @@ void *bypassMemcmp(void *arg) {
     return NULL;
 }
 
-/*
 void hideLibrary() {
     //unlink("/proc/self/maps");
     char path[64];
     sprintf(path, "/proc/%d/maps", getpid());
     unlink(path);
-} */
+}
 
 void *main_thread(void *) {
     while (!m_IL2CPP) {
@@ -269,7 +268,7 @@ void *main_thread(void *) {
     Il2CppAttach("liblogic.so");
     sleep(5);
 
-	//hideLibrary();
+	hideLibrary();
 	
 	DobbyInstrument(dlsym(RTLD_NEXT, "eglSwapBuffers"), eglSwapBuffers_handler);
 	
