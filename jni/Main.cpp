@@ -127,7 +127,7 @@ bool PatchOffset(uintptr_t address, const void *buffer, size_t length) {
     unsigned long size = page_size * sizeof(uintptr_t);
     return mprotect((void *)(address - (address % page_size) - page_size), (size_t) size, PROT_EXEC | PROT_READ | PROT_WRITE) == 0 && memcpy((void *)address, (void *)buffer, length) != 0;
 }
-/*
+
 void detectDump() {
     std::ifstream mapsFile("/proc/self/maps");
     std::string line;
@@ -138,7 +138,7 @@ void detectDump() {
             kill(getpid(), SIGKILL);
         }
     }
-} */
+}
 
 /*
 int yaserClose() {
