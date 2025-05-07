@@ -182,7 +182,7 @@ void YaserAntiCrack1() {
     }
 } */
 
-/*
+
 bool IsVPNEnabled() {
     JNIEnv *env;
     g_vm->AttachCurrentThread(&env, 0);
