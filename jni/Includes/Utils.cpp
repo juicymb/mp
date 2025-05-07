@@ -1,7 +1,7 @@
 #include "obfuscate.h"
 #include <fstream>
 #include "Includes/Utils.h"
-//#include "Includes/base64.hpp"
+#include "Includes/base64.hpp"
 const char *libName = "libil2cpp.so"; //Default target lib is Il2Cpp
 
 DWORD findLibrary(const char *library) {
