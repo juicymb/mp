@@ -5,7 +5,7 @@
   Themaphack.
   <br>
 </h1>
-<h3 align="center">The most honest mod menu for Mobile Legends built on top of <a href="https://www.dearimgui.com/" target="_blank">imgui</a>.</h3>
+<h3 align="center">The most honest mod menu for Mobile Legends built on top of <a href="https://www.dearimgui.com/" target="_blank">imgui</a>.</h3><br>
 
 <p align="center">
   <a href="https://badge.fury.io/js/electron-markdownify">
