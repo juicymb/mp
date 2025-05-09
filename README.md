@@ -1,11 +1,8 @@
 <h1 align="center">
   <br>
   <a href="http://https://github.com/anggorodhanumurti/themaphack/"><img src="https://raw.githubusercontent.com/anggorodhanumurti/themaphack/refs/heads/main/images/tmh-logo.png" alt="tmh" width="200"></a>
-  <br>
-  Themaphack.
-  <br>
 </h1>
-
+<h3 align="center"> Themaphack.</h3>
 <h4 align="center">A highly extensible mod menu with minimalist approach built on top of <a href="https://www.dearimgui.com/" target="_blank">imgui</a>.</h4>
 
 <p align="center">
