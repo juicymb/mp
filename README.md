@@ -5,7 +5,7 @@
   Themaphack.
   <br>
 </h1>
-<h4 align="center">A highly extensible mod menu with minimalist approach built on top of <a href="https://www.dearimgui.com/" target="_blank">imgui</a>.</h4>
+<h4 align="center">The most honest mod menu for Mobile Legends with minimalist approach built on top of <a href="https://www.dearimgui.com/" target="_blank">imgui</a>.</h4>
 
 <p align="center">
   <a href="https://badge.fury.io/js/electron-markdownify">
@@ -32,9 +32,11 @@
 
 ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
 
-it is not the most safest but i guarantee you that **this is the most honest** because the fact is there is no 100% cheats that safe from getting banned.
+it is not the most safest but i guarantee you that **this is the most honest** because the fact that there is no 100% cheats that safe from getting banned.
 
-Remember when you paid some money for premium mod that said it's safe for only a 30 days but end up getting banned for a 30 years. Your account lost with no refund that suck! i dont wanna overclaim but here best thing i can give:
+Remember when you paid some money for premium mod that said it's safe for only a 30 days but end up getting banned for a 30 years. 
+
+Your account lost with no refund that suck! i dont wanna overclaim but here best thing i can give:
 
 * LivePreview - Make changes, See changes
   - Instantly see what your Markdown documents look like in HTML as you create them.
