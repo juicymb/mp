@@ -32,7 +32,9 @@
 
 ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
 
-### Key Features
+it is not the most safest but i guarantee you that **this is the most honest** because the fact is there is no 100% cheats that safe from getting banned.
+
+Remember when you paid some money for premium mod that said it's safe for only a 30 days but end up getting banned for a 30 years. Your account lost with no refund that suck! i dont wanna overclaim but here best thing i can give:
 
 * LivePreview - Make changes, See changes
   - Instantly see what your Markdown documents look like in HTML as you create them.
