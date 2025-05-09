@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <a href="#key-features">Key Features</a> •
+  <a href="#honest-mod">Honest Mod</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#download">Download</a> •
   <a href="#credits">Credits</a> •
@@ -32,29 +32,25 @@
 
 ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
 
-it is not the most safest but i guarantee you that **this is the most honest** because the fact that there is no 100% cheats that safe from getting banned.
+## Honest Mod
 
-Remember when you paid some money for premium mod that said it's safe for only a 30 days but end up getting banned for a 30 years. 
+The fact that there is no 100% cheats that safe from getting banned.
 
-Your account lost with no refund that suck! i dont wanna overclaim but here best thing i can give:
+Remember when you paid some money for premium mod just for 30 days they claim it safe from being banned but end up getting banned for 30 years (even when usage duration not yet over).
 
-* LivePreview - Make changes, See changes
-  - Instantly see what your Markdown documents look like in HTML as you create them.
-* Sync Scrolling
-  - While you type, LivePreview will automatically scroll to the current location you're editing.
-* GitHub Flavored Markdown  
-* Syntax highlighting
-* [KaTeX](https://khan.github.io/KaTeX/) Support
-* Dark/Light mode
-* Toolbar for basic Markdown formatting
-* Supports multiple cursors
-* Save the Markdown preview as PDF
-* Emoji support in preview :tada:
-* App will keep alive in tray for quick usage
-* Full screen mode
-  - Write distraction free.
-* Cross platform
-  - Windows, macOS and Linux ready.
+You lost your acount without refund that suck! i dont wanna overclaim but here the best thing i can give:
+
+* Free forever
+  - You can generate free key (unlimited) in our website.
+* Open source, Transparency & Modular
+  - feel free to use this source code as a template for your mod menu project
+  - you dont need to trust me just inspect the code yourself and build it there is no obfuscated code inside
+  - you can extend the feature of this mod to suits your needs, thanks to its modular code
+* Responsive maphack
+  - once it activated it will adjust your phone screen automatically
+* Complete ESP 
+  - enemy health, line, box, monster hero icon, what else you name it i got it
+* Feature requests? feedback, bug or suggestion post in <a href="https://github.com/anggorodhanumurti/themaphack/issues">issues section</a>
 
 ## How To Use
 
