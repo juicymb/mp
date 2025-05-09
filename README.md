@@ -1,8 +1,9 @@
-
 <h1 align="center">
   <br>
   <a href="http://https://github.com/anggorodhanumurti/themaphack/"><img src="https://raw.githubusercontent.com/anggorodhanumurti/themaphack/refs/heads/main/images/tmh-logo.png" alt="tmh" width="200"></a>
-  <h2 align="center"> Themaphack. </h2>
+  <br>
+  Themaphack.
+  <br>
 </h1>
 
 <h4 align="center">A highly extensible mod menu with minimalist approach built on top of <a href="https://www.dearimgui.com/" target="_blank">imgui</a>.</h4>
@@ -122,4 +123,3 @@ MIT
 > [amitmerchant.com](https://www.amitmerchant.com) &nbsp;&middot;&nbsp;
 > GitHub [@amitmerchant1990](https://github.com/amitmerchant1990) &nbsp;&middot;&nbsp;
 > Twitter [@amit_merchant](https://twitter.com/amit_merchant)
-
