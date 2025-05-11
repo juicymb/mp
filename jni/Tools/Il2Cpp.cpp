@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include "Il2Cpp.h"
 #include "Tools/xDL/xdl.h"
-#include "XorStr.hpp"
 /*
 Update support Latest MLBB Dump by DivaArvian - Share?Gay
 */

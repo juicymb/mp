@@ -41,10 +41,8 @@
 #include <netdb.h>
 #include <dlfcn.h>
 
-// itnternal module start here
+// internal module start here
 #define IMGUI_DEFINE_MATH_OPERATORS
-//#include "Includes/obfuscate.h"
-//#include <XorStr.hpp> //enc()
 
 #include "imgui.h"
 #include "imgui_additional.h"
@@ -70,30 +68,19 @@
 #include "XYZ/Unity/Struct/Vector2.h"
 #include "XYZ/Unity/Struct/Rect.h"
 #include "XYZ/Unity/Struct/Quaternion.h"
-
 #include "XYZ/ConfigName.h"
-
 #include "Config/setup.h"
 #include "Config/JNIStuff.h"
 #include "Config/TouchSystem.h"
 #include "XYZ/IconMinimap/DrawIcon.h"
 #include "Tools/Login/Login.h"
-/*
-#include "XYZ/GameClass_Hero.h"
-#include "XYZ/GameClass_Skin.h"*/
 #include "XYZ/GameClass.h"
-//#include "XYZ/UnlockSkin.h"
 #include "XYZ/ToString.h"
-//#include "XYZ/RoomInfo.h"
 #include "XYZ/SDK.h"
-//#include "XYZ/AimPredict.h"
 #include "XYZ/DrawMinimap.h"
 #include "XYZ/Minimap.h"
 #include "XYZ/DrawESP.h"
 #include "XYZ/Bypass.h"
-//#include "XYZ/AutoSkills.h"
-//#include "XYZ/AutoAim.h"
-
 #include "DrawMenu.h"
 
 #undef stderr
@@ -291,8 +278,8 @@ void *g_Il2CppInitFunc, *g_Il2CppSymFunc;
 jint (JNICALL *Real_JNI_OnLoad)(JavaVM *vm, void *reserved);
 JNIEXPORT jint JNICALL Call_JNI_OnLoad(JavaVM *vm, void *reserved) {
     std::string apkPkg = getPackageName(GetJNIEnv(g_vm));
-    std::string fromPath = std::string("/sdcard/Android/data/") + apkPkg.c_str() + std::string("/files/dragon2017/assets/comlibs/") + std::string(ARCH) + std::string("/libXYOURZONE.bytes");
-    std::string toPath = std::string("/data/user/0/") + apkPkg.c_str() + std::string("/app_libs/libXYOURZONE.bytes");
+    std::string fromPath = std::string("/sdcard/Android/data/") + apkPkg.c_str() + std::string("/files/dragon2017/assets/comlibs/") + std::string(ARCH) + std::string("/libTMH.bytes");
+    std::string toPath = std::string("/data/user/0/") + apkPkg.c_str() + std::string("/app_libs/libTMH.bytes");
  
     CopyFile(fromPath.c_str(), toPath.c_str());
     if (!g_Il2CppInitFunc)g_Il2CppInitFunc = dlopen(toPath.c_str(), RTLD_LAZY);
