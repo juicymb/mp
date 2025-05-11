@@ -5,7 +5,7 @@
   Themaphack.
   <br>
 </h1>
-<h3 align="center">The most honest mod menu for Mobile Legends built on top of <a href="https://www.dearimgui.com/" target="_blank">imgui</a>.</h3><br>
+<h3 align="center">The most honest mod menu for Mobile Legends with Lightweight cheats loader.</h3><br>
 
 <p align="center">
   <a href="https://badge.fury.io/js/electron-markdownify">
@@ -22,9 +22,9 @@
 </p>
 
 <p align="center">
-  <a href="#honest-mod">Honest Mod</a> •
-  <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
+  <a href="#about">About</a> •
+  <a href="#build">Build</a> •
+  <a href="#usage">Usage</a> •
   <a href="#credits">Credits</a> •
   <a href="#related">Related</a> •
   <a href="#license">License</a>
@@ -32,11 +32,11 @@
 
 ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
 
-## Honest Mod
+## About
 
-The fact that there is no 100% cheats that safe from getting banned.
+The fact that there is no 100% cheats that safe from being banned.
 
-Remember when you paid some money for premium mod just for 30 days they claim it safe from being banned but end up getting banned for 30 years (even when usage duration not yet over).
+Remember when you paid some money for premium mod just for 30 days they claim it safe but end up getting banned for 30 years (even when the usage duration not yet over).
 
 You lost your acount without refund that suck! i dont wanna overclaim but here the best thing i can give:
 
@@ -52,7 +52,7 @@ You lost your acount without refund that suck! i dont wanna overclaim but here t
   - enemy health, line, box, monster hero icon, what else you name it i got it
 * Feature requests? feedback, bug or suggestion post in <a href="https://github.com/anggorodhanumurti/themaphack/issues">issues section</a>
 
-## How To Use
+## Build
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
@@ -74,7 +74,7 @@ $ npm start
 > If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
 
 
-## Download
+## Usage
 
 You can [download](https://github.com/amitmerchant1990/electron-markdownify/releases/tag/v1.2.0) the latest installable version of Markdownify for Windows, macOS and Linux.
 
