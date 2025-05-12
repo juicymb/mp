@@ -30,13 +30,13 @@
   <a href="#license">License</a>
 </p>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+![screenshot](https://raw.githubusercontent.com/anggorodhanumurti/themaphack/refs/heads/main/images/themaphack.gif)
 
 ## About
 
 The fact that there is no 100% cheats that safe from being banned.
 
-Remember when you paid some money for premium mod just for 30 days they claim it safe but end up getting banned for 30 years (even when the usage duration not yet over).
+Remember when you paid for premium mod just for 30 days they claim it safe but end up getting banned for 30 years (even when the usage duration not yet over).
 
 You lost your acount without refund that suck! i dont wanna overclaim but here the best thing i can give:
 
@@ -44,12 +44,12 @@ You lost your acount without refund that suck! i dont wanna overclaim but here t
   - You can generate free key (unlimited) in our website.
 * Open source, Transparency & Modular
   - feel free to use this source code as a template for your mod menu project
-  - you dont need to trust me just inspect the code yourself and build it there is no obfuscated code inside
+  - you dont need to trust me just inspect the code yourself and build it there is no malicious code inside
   - you can extend the feature of this mod to suits your needs, thanks to its modular code
 * Responsive maphack
   - once it activated it will adjust your phone screen automatically
 * Complete ESP 
-  - enemy health, line, box, monster hero icon, what else you name it i got it
+  - enemy health, line, box, monster hero icon, what else you name it
 * Feature requests? feedback, bug or suggestion post in <a href="https://github.com/anggorodhanumurti/themaphack/issues">issues section</a>
 
 ## Build
