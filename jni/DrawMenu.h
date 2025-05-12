@@ -732,7 +732,7 @@ void DrawMenu() {
                     ImGui::BeginGroupPanel("Key Info", ImVec2(-1.0f, 0.0f));
                     {
 						Text("Telegram Group: "); SameLine();
-                        TextColored(RGBA2ImVec4(176, 40, 40, 255), "@XYOURZONEGROUP");
+                        TextColored(RGBA2ImVec4(176, 40, 40, 255), "@THEMAPHACK");
                         Text("Key Expired: "); SameLine();
                         ImGui::TextColored(RGBA2ImVec4(176, 40, 40, 255), expired.c_str());
                         Text("Key Slot: "); SameLine();
@@ -747,7 +747,7 @@ void DrawMenu() {
 						}
 						
 						Text("Telegram Channel: "); SameLine();
-						Text("@XYOURZONE");
+						Text("@THEMAPHACK");
                     }
                     ImGui::EndGroupPanel();
                 }
