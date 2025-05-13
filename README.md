@@ -116,4 +116,4 @@ This software uses the following open source packages:
 ## License
 
 Released under <a href="/LICENSE">MIT</a> by <a href="https://github.com/anggorodhanumurti">@anggorodhanumurti</a>.
-Twitter [@anggorodhanumurti](https://twitter.com/casperspy)
+Twitter [@casperspy](https://twitter.com/casperspy)
