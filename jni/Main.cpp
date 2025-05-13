@@ -127,7 +127,7 @@ void detectDump() {
     }
 }
 
-/*
+
 int yaserClose() {
     JavaVM* java_vm = i_App->activity->vm;
     JNIEnv* java_env = NULL;
@@ -167,8 +167,7 @@ void YaserAntiCrack1() {
     } else {
         
     }
-} */
-
+}
 
 bool IsVPNEnabled() {
     JNIEnv *env;
