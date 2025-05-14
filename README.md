@@ -12,7 +12,7 @@
   <a href="https://"><img src="https://img.shields.io/badge/generate-key-blue?logo=keeweb&logoColor=fff" alt="generate - key">
   </a>
   <a href="https://github.com/anggorodhanumurti/themaphack/releases/"><img src="https://img.shields.io/github/tag/anggorodhanumurti/themaphack?include_prereleases=&sort=semver&color=blue" alt="GitHub tag"></a>
-<a href="#license"><img src="https://img.shields.io/badge/License-MIT-blue" alt="License"></a>
+<a href="#license"><img src="https://img.shields.io/badge/License-GNU_GPL_V3-blue" alt="License"></a>
   <a href="https://www.paypal.me/">
     <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
   </a>
@@ -115,5 +115,6 @@ This software uses the following open source packages:
 
 ## License
 
-Released under <a href="/LICENSE">MIT</a> by <a href="https://github.com/anggorodhanumurti">@anggorodhanumurti</a>.
-Twitter [@casperspy](https://twitter.com/casperspy)
+> Released under <a href="/LICENSE">GNU GPL V3</a> by <a href="https://github.com/anggorodhanumurti">@anggorodhanumurti</a>.
+
+> Twitter [@casperspy](https://twitter.com/casperspy)
