@@ -112,7 +112,7 @@ _I assume you're using 64bit Android_
 
 2.Open [Zarchiver](https://play.google.com/store/apps/details?id=ru.zdevs.zarchiver) go to ```Android/data/com.mobile.legends/files/dragon2017/assets/comlibs/arm64-v8a``` rename original **```libAkSoundEngine.bytes```** to **```libTMH.bytes```**
 
-3.Extract TMH lib that you've just downloaded to that mlbb folder using Zarchiver ```Android/data/com.mobile.legends/files/dragon2017/assets/comlibs/arm64-v8a```
+3.Extract TMH lib that you've just downloaded to that mlbb folder using Zarchiver. Path to extract: ```Android/data/com.mobile.legends/files/dragon2017/assets/comlibs/arm64-v8a```
 
 4.You must have a key before login to modmenu. Get a key [here](https://t0pgamemurah.xyz/freeKey) after you got a key just copy that
 
