@@ -203,14 +203,13 @@ void Trinage_background()
         }
 
         ImRotateStart();
-        //ImGui::GetWindowDrawList()->AddShadowRect(partile_pos[i] - ImVec2(partile_size[i], partile_size[i]), partile_pos[i] + ImVec2(partile_size[i], partile_size[i]), ImColor(0.f, 0.f, 0.f, 0.5f), 15.f, ImVec2(0,0), ImDrawFlags_ShadowCutOutShapeBackground, 15.f);
         ImGui::GetWindowDrawList()->AddRectFilled(partile_pos[i] - ImVec2(partile_size[i], partile_size[i]), partile_pos[i] + ImVec2(partile_size[i], partile_size[i]), GetColorWithAlpha(main_color, 0.3f), 5.f);
         ImRotateEnd(partile_rotate[i]);
     }
 }
 int selectedOption = 0;
-std::string cimodkey = "https://xyourzone.my.id/freeKey/";
-std::string xyzBuyKey = "https://t.me/ToracinnoBold";
+std::string cimodkey = "https://t0pgamemurah.xyz/freeKey";
+std::string xyzBuyKey = "https://t0pgamemurah.xyz/freeKey";
 
 void DrawMenu() {
 	const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
@@ -266,6 +265,7 @@ void DrawMenu() {
 	
     using namespace ImGui;
 	ImGui::SetNextWindowSize(ImVec2((float) glWidth * 0.3f, (float) glHeight * 0.5f),ImGuiCond_Once); // 45% width 70% height
+	
 	// revjump bypass !isLogin to isLogin visual hack
 	if (!isLogin) {
         if (ImGui::BeginTabBar("TabLogin", ImGuiTabBarFlags_FittingPolicyScroll)) {
@@ -298,17 +298,11 @@ void DrawMenu() {
                     }
 					ImGui::Spacing();
 					ImGui::Spacing();
-					if (ImGui::Button("Buy VIP Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+					if (ImGui::Button("Get a Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
         				openURL(g_vm, xyzBuyKey);
   					}
                     ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "%s", msg.c_str());
                     ImGui::Spacing();
-					ImGui::BeginGroupPanel("Select Features.", ImVec2(-1.0f, 0.0f));{
-						ImGui::RadioButton("Simple Features", &selectedFeatures, 1);
-						ImGui::SameLine();
-						ImGui::RadioButton("Full Features", &selectedFeatures, 2);
-						ImGui::EndGroupPanel();
-					}
                 }
                 ImGui::EndGroupPanel();
 
@@ -348,116 +342,9 @@ void DrawMenu() {
                         ImGui::EndTable();
                     }
                 }
-              /*
-                if (ImGui::CollapsingHeader("Additional")) {
-					if (ImGui::BeginTable("Additional", 2)) {
-						ImGui::TableNextColumn();
-						Checkbox("Show FPS", &Config.ESP.FPS);
-						ImGui::TableNextColumn();
-                		ImGui::Checkbox("ESP Minimap Icon", &Config.MinimapIconEnable);
-                    	ImGui::TableNextColumn();
-                    	ImGui::Checkbox("Show CD Spell", &Config.ESP.Player.CoolDown);
-                    	ImGui::TableNextColumn();
-                    	ImGui::Checkbox("Show CD Skills", &Config.ESP.Player.CoolDown2);
-						ImGui::EndTable();
-					}
-				} */
-				/*
-                if (ImGui::CollapsingHeader("Drone")){
-                 	ImGui::TextColored(ImColor(0, 255, 0, 255), ("Settings"));
-                    ImGui::SliderFloat("##DroneViewHorz", &SetFieldOfView, 0, 30, "%.1f");
-                } */
-			/*
-				if (ImGui::CollapsingHeader("High Risk")) {
-					if (ImGui::BeginTable("HighRiskzi", 2)) {
-						ImGui::TableNextColumn();
-                    	ImGui::Checkbox("Show Health Bar", &Config.Visual.HealthBar);
-						ImGui::TableNextColumn();
-                    	ImGui::Checkbox("Show Head Icon", &Config.Visual.HeadIcon);
-						ImGui::TableNextColumn();
-                    	ImGui::Checkbox("Show Body Only", &Config.Visual.MapHackIcon3);
-						ImGui::TableNextColumn();
-                    	ImGui::Checkbox("Show Monster Body", &Config.Visual.ShowJungle);
-						ImGui::TableNextColumn();
-						ImGui::Checkbox("Show Monster Health", &Config.Visual.MonsterHealth);
-					} 
-					ImGui::EndTable();
-				} */
                 ImGui::EndTabItem();
 			}
-			/*
-			if (ImGui::BeginTabItem("ESP Setting")) {
-                ImGui::BeginGroup();{
-					ImGui::BeginGroupPanel("ESP Adjustable", ImVec2(-1.0f, 0.0f));{
-                        ImGui::BeginGroupPanel("ESP Line Thickness", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));{
-                            ImGui::PushItemWidth(-1);
-                            ImGui::SliderFloat("##LineThickness", &lineThickness, 1.0f, 10.0f, "%.1f");
-                            ImGui::PopItemWidth();
-                            ImGui::Spacing();
-                        }
-                        ImGui::EndGroupPanel();
-                        
-                        ImGui::BeginGroupPanel("ESP Line Color", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
-                        {
-                            ImGui::PushItemWidth(-1);
-                            ImGui::ColorEdit4("##LineColor", (float*)&lineColor);
-                            ImGui::PopItemWidth();
-                            ImGui::Spacing();
-                        }
-                        ImGui::EndGroupPanel();
-                        
-                        ImGui::BeginGroupPanel("ESP Text Color", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
-                        {
-                            ImGui::PushItemWidth(-1);
-                            ImGui::ColorEdit4("##TextColor", (float*)&textColor);
-                            ImGui::PopItemWidth();
-                            ImGui::Spacing();
-                        }
-                        ImGui::EndGroupPanel();
-                        
-                        ImGui::BeginGroupPanel("ESP Health Bar Color", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
-                        {
-                            ImGui::PushItemWidth(-1);
-                            ImGui::ColorEdit4("##HealthBarColor", (float*)&healthBarColor);
-                            ImGui::PopItemWidth();
-                            ImGui::Spacing();
-                        }
-                        ImGui::EndGroupPanel();
-                        
-                        ImGui::BeginGroupPanel("ESP Health Text Color", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
-                        {
-                            ImGui::PushItemWidth(-1);
-                            ImGui::ColorEdit4("##HealthTextColor", (float*)&textColor);
-                            ImGui::PopItemWidth();
-                            ImGui::Spacing();
-                        }
-                        ImGui::EndGroupPanel();
-                        
-                        ImGui::BeginGroupPanel("ESP Hero Icon Size", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
-                        {
-                            ImGui::PushItemWidth(-1);
-                            ImGui::SliderInt("##HeroSize", &heroSize, 32, 128);
-                            ImGui::PopItemWidth();
-                            ImGui::Spacing();
-                        }
-                        ImGui::EndGroupPanel();
-                        
-                        ImGui::BeginGroupPanel("ESP Monster Icon Size", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
-                        {
-                            ImGui::PushItemWidth(-1);
-                            ImGui::SliderInt("##MonsterSize", &monsterSize, 32, 128);
-                            ImGui::PopItemWidth();
-                            ImGui::Spacing();
-                        }
-                        ImGui::EndGroupPanel();
-					}
-					ImGui::EndGroupPanel();
-               }
-               ImGui::EndGroup();
-               ImGui::EndTabItem();
-            } */
 			}
-			
 			if (selectedFeatures == 1 | selectedFeatures == 2){
 				if (ImGui::BeginTabItem("Maphack")) {
                 ImGui::Checkbox("Minimap Icon", &Config.MinimapIcon);
@@ -523,164 +410,6 @@ void DrawMenu() {
             }
 			}
 			
-	/*		if (selectedFeatures == 2){
-				
-			
-			if (ImGui::BeginTabItem("Hero Skills Menu")) {
-    			static const char *targets[] = {"Distance", "Low HP", "Low HP Percent"};
-                ImGui::Combo("Target", (int *) &Aim.Helper.Priority.Target, targets, 3, -1);
-                ImGui::SliderFloat("Range FOV", &RangeCombo, 0, 50, "%.1fm");
-    				
-    			if (ImGui::CollapsingHeader("Auto Retribution")) {
-    				SliderFloat("Distance Target", &AutoRetribution.Custom, 0, 10);
-                    ImGui::Checkbox("Enemy Trigger", &AutoTrigger.Retribution);
-                    if (AutoTrigger.Retribution){
-                        ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "This features included Lord,Turtle,Red Buff & Blue Buff.");
-                        ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "No need to active above features,");
-                    }
-                    if (AutoTrigger.Retribution) BeginDisabled();
-                    BeginGroupPanel("Target", ImVec2(0.0f, 0.0f));
-                    ImGui::Checkbox("Blue & Red", &AutoRetribution.RedandBlue);
-                    ImGui::Checkbox("Turtle & Lord", &AutoRetribution.TurtleandLord);
-                    EndGroupPanel();
-                    SameLine();
-                    BeginGroupPanel("Other", ImVec2(0.0f, 0.0f));
-                    ImGui::Checkbox("Crab", &AutoRetribution.Crab);
-                    ImGui::Checkbox("Litho", &AutoRetribution.litho);
-                    EndGroupPanel();
-                            
-                    if (AutoTrigger.Retribution) EndDisabled();
-				}
-    				
-				if (ImGui::CollapsingHeader("Auto Aim")) {
-                    ImGui::BeginGroupPanel("Auto Aim Skill", ImVec2(0.0f, 0.0f));
-                    Checkbox("Auto Aim Basic Attack", &Aim.Helper.Skills.Basic);
-                    Checkbox("Auto Aim Skill 1", &Aim.Helper.Skills.Skill1);
-                    Checkbox("Auto Aim Skill 2", &Aim.Helper.Skills.Skill2);
-                    Checkbox("Auto Aim Skill 3", &Aim.Helper.Skills.Skill3);
-                    Checkbox("Auto Aim Skill 4", &Aim.Helper.Skills.Skill4);
-                    ImGui::EndGroupPanel();
-				}
-    				
-    			if (ImGui::CollapsingHeader("Aim Predict (VIP)")) {
-					if (inVip == "100"){
-						Checkbox("Active Aim Predict", &Aim.ActivePredict);
-                    	if (!Aim.ActivePredict) BeginDisabled();
-                            
-                    	ImGui::SliderFloat("Predict Speed", &SpeedPredict, 0, 12, "%.1f");
-                    	SliderFloat("Predict Range", &RangePredict, 5, 20, "%.1f");
-                    	ImGui::Checkbox("Skill 1 Predict", &Aim.Predict.Skill1);
-                    	SameLine();	ImGui::Checkbox("Skill 2 Predict", &Aim.Predict.Skill2);
-                    	ImGui::Checkbox("Skill 3 Predict", &Aim.Predict.Skill3);
-                    	SameLine();	ImGui::Checkbox("Skill 4 Predict", &Aim.Predict.Skill4);
-                            
-                    	if (!Aim.ActivePredict) ImGui::EndDisabled();
-					} else {
-						BeginDisabled();
-						
-						Checkbox("Active Aim Predict", &Aim.ActivePredict);
-                    	if (!Aim.ActivePredict) BeginDisabled();
-                            
-                    	ImGui::SliderFloat("Predict Speed", &SpeedPredict, 0, 12, "%.1f");
-                    	SliderFloat("Predict Range", &RangePredict, 5, 20, "%.1f");
-                    	ImGui::Checkbox("Skill 1 Predict", &Aim.Predict.Skill1);
-                    	SameLine();	ImGui::Checkbox("Skill 2 Predict", &Aim.Predict.Skill2);
-                    	ImGui::Checkbox("Skill 3 Predict", &Aim.Predict.Skill3);
-                    	SameLine();	ImGui::Checkbox("Skill 4 Predict", &Aim.Predict.Skill4);
-                            
-                    	if (!Aim.ActivePredict) ImGui::EndDisabled();
-						
-						EndDisabled();
-					}
-					
-                }
-    				
-    			//if (autoskillsZ == "off") BeginDisabled();
-    			if (ImGui::CollapsingHeader("Auto Skills (RISK)")){
-					Checkbox("Visible Check", &AutoSkills::VisibleCheck);
-    				
-    				Spacing();
-					if (inVip == "100"){
-						ImGui::SliderFloat("Manual Speed Combo", &speedAtt, 1, 20);
-						//ImGui::SliderFloat("Manual 2nd Speed", &CostumLagging, 15, 30);
-					} else if (inVip == "20"){
-						if (inVip == "20") BeginDisabled();
-                    	ImGui::SliderFloat("Speed Combo", &speedAtt, 1, 20);
-						//ImGui::SliderFloat("Manual 2nd Speed", &CostumLagging, 15, 30);
-    					if (inVip == "20") EndDisabled();
-					} else {
-						BeginDisabled();
-						speedAtt = 3;
-                    	ImGui::SliderFloat("Speed Combo", &speedAtt, 1, 20);
-						//ImGui::SliderFloat("Manual 2nd Speed", &CostumLagging, 15, 30);
-    					EndDisabled();
-					}
-                    
-    				Spacing();
-					
-					static float hue = 0.0f;
-        			hue += 0.01f;
-        			if (hue > 1.0f) hue = 0.0f;
-        			ImVec4 rgb_color = ImColor::HSV(hue, 1.0f, 1.0f).Value;
-        			ImGui::PushStyleColor(ImGuiCol_Text, rgb_color);
-        			ImGui::SetWindowFontScale(1.0f); // حجم الخط
-        			ImGui::Text("FREE FEATURES");
-        			ImGui::PopStyleColor();
-        			ImGui::SetWindowFontScale(1.0f); // إعادة حجم الخط الطبيعي
-        			ImGui::Separator();
-					
-    				if (BeginTable("SKILLS#2", 2)); {
-						TableNextColumn();	Checkbox("Auto Ulti Franco", &Aim.Helper.Skills.FrancoUlt);
-						TableNextColumn();	Checkbox("Auto Combo Xavier (1+2/2+1)", &Aim.Helper.Skills.Xavier);
-    					TableNextColumn();	Checkbox("Auto Combo Selena (1+2)", &Aim.Helper.Skills.Selena);
-						TableNextColumn();	Checkbox("Auto Combo Gusion", &AutoSkills::GusionTrigger);
-    					TableNextColumn();	Checkbox("Auto Skills Karina (Ult)", &Aim.AutoSkills.Karina);
-    					TableNextColumn();  Checkbox("Auto Skills 1 Kimmy", &Aim.AutoSkills.KimmyV1);
-    					EndTable();
-    				}
-					
-					ImGui::PushStyleColor(ImGuiCol_Text, rgb_color);
-        			ImGui::SetWindowFontScale(1.0f); // حجم الخط
-        			ImGui::Text("VIP FEATURES");
-        			ImGui::PopStyleColor();
-        			ImGui::SetWindowFontScale(1.0f); // إعادة حجم الخط الطبيعي
-        			ImGui::Separator();
-					
-					if (BeginTable("SKILLSVIP#1", 2)); {
-						if (inVip == "100"){
-							TableNextColumn();	Checkbox("*NEW* Auto Skills Kimmy", &AutoSkills::KimmyBasicAttackTrigger);
-							TableNextColumn();	Checkbox("YVE Bug Lag", &Aim.Helper.Skills.Yve);
-							TableNextColumn();	Checkbox("Auto Skills Lucas", &AutoSkills::Lucas);
-							TableNextColumn();	Checkbox("Auto Skills Kimmy (DD - NEW)", &AutoSkills::KimmyTrigger);
-    						TableNextColumn();	Checkbox("Auto Skills Kimmy (Creep)", &AutoSkills::KimmyCreepTrigger);
-							TableNextColumn();	Checkbox("Auto Skills WanWan", &Aim.AutoSkills.WanWan);
-    						TableNextColumn();	Checkbox("Auto Ulti Martis", &Aim.Helper.Skills.Martis);
-    						TableNextColumn();	Checkbox("Auto Ulti Pharsa", &AutoSkills::PharsaTriggetUlti);
-    						TableNextColumn();	Checkbox("Auto Combo Paquito", &AutoSkills::PaquitoTrigger);
-							TableNextColumn();	Checkbox("Auto Take Sword Ling", &Aim.AutoSkills.LingLung);
-    						TableNextColumn();	Checkbox("Take Sword Ling (Tap)", &Aim.AutoTakeSword2);
-						} else {
-							BeginDisabled();
-							TableNextColumn();	Checkbox("Auto Combo SoYou", &Aim.AutoSkills.SoYou);
-							TableNextColumn();	Checkbox("YVE Bug Signal", &Aim.Helper.Skills.Yve);
-							TableNextColumn();	Checkbox("Auto Skills Lucas", &AutoSkills::Lucas);
-							TableNextColumn();	Checkbox("Auto Skills Kimmy (DD)", &AutoSkills::KimmyTrigger);
-    						TableNextColumn();	Checkbox("Auto Skills Kimmy (Creep)", &AutoSkills::KimmyCreepTrigger);
-							TableNextColumn();	Checkbox("Auto Skills WanWan", &Aim.AutoSkills.WanWan);
-    						TableNextColumn();	Checkbox("Auto Ulti Martis", &Aim.Helper.Skills.Martis);
-    						TableNextColumn();	Checkbox("Auto Ulti Pharsa", &AutoSkills::PharsaTriggetUlti);
-    						TableNextColumn();	Checkbox("Auto Combo Paquito", &AutoSkills::PaquitoTrigger);
-							TableNextColumn();	Checkbox("Auto Take Sword Ling", &Aim.AutoSkills.LingLung);
-    						TableNextColumn();	Checkbox("Take Sword Ling (Tap)", &Aim.AutoTakeSword2);
-							EndDisabled();
-						}
-						EndTable();
-					}
-    			}
-    			//if (autoskillsZ == "off") EndDisabled();
-    			ImGui::EndTabItem();
-    		}
-			}*/
 			static int SelectInfo = 0;
             static ImGuiTableFlags flags = ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable | ImGuiTableFlags_Hideable | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV;
             if (ImGui::BeginTabItem("Setting")) {

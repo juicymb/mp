@@ -1,6 +1,8 @@
-This mod is not 100% safe, if you getting ban, that's the consequence of using cheat
+I can not guarantee you that this mod is 100% safe from being banned, but i can minimize the banned risk up to 98% as long as you follow my guidance
+
+The rest 2 % is depend on your playstyle and report from other player
 
 Paste Location:
-/storage/emulated/0/Android/data/com.mobile.legends/files/dragon2017/assets/comlibs/
+/storage/emulated/0/Android/data/com.mobile.legends/files/dragon2017/assets/comlibs/arm64-v8a
 
 If you using 64 bit apk, and you getting freezing while attacking, you can change it to 32 bit

@@ -1,11 +1,11 @@
 #pragma once
 
 /*
-New Updated by @ToracinnoBold
+New Updated by @casperspy
 
 Support for hooking new dictionary method with void and int.
 
-@XYOURZONE
+@themaphack
 */
 
 #include <stdio.h>

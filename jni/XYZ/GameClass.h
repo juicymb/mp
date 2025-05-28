@@ -1,10 +1,4 @@
 //method
-/*
-#define Screen_get_width (uintptr_t) Il2CppGetMethodOffset("UnityEngine.CoreModule.dll", "UnityEngine", "Display", "get_systemWidth")
-#define Screen_get_height (uintptr_t) Il2CppGetMethodOffset("UnityEngine.CoreModule.dll", "UnityEngine", "Display", "get_systemHeight")
-#define Screen_SetResolution (uintptr_t) Il2CppGetMethodOffset("UnityEngine.dll", "UnityEngine", "Screen", "SetResolution", 3)
-#define Screen_get_dpi (uintptr_t) Il2CppGetMethodOffset("UnityEngine.dll", "UnityEngine", "Screen", "get_dpi")
-*/
 
 typedef unsigned long dword;
 
@@ -43,12 +37,6 @@ class Screen {
         return _();
     }
 };
-/*
-#define Camera_get_main (uintptr_t) Il2CppGetMethodOffset("UnityEngine.dll", "UnityEngine", "Camera", "get_main")
-#define Camera_WorldToScreenPoint (uintptr_t) Il2CppGetMethodOffset("UnityEngine.dll", "UnityEngine", "Camera", "WorldToScreenPoint", 1)
-#define Camera_get_fieldOfView (uintptr_t) Il2CppGetMethodOffset("UnityEngine.dll", "UnityEngine", "Camera", "get_fieldOfView")
-#define Camera_set_fieldOfView (uintptr_t) Il2CppGetMethodOffset("UnityEngine.dll", "UnityEngine", "Camera", "set_fieldOfView", 1)
-*/
 
 uintptr_t Camera_get_main() {
     return (uintptr_t) Il2CppGetMethodOffset("UnityEngine.CoreModule.dll", "UnityEngine", "Camera", "get_main");
@@ -70,11 +58,6 @@ uintptr_t Camera_set_fieldOfView() {
 }
 
 //Class Transform
-/*
-#define Transform_get_position (uintptr_t) Il2CppGetMethodOffset("UnityEngine.CoreModule.dll", "UnityEngine", "Transform", "get_position")
-#define Transform_get_localPosition (uintptr_t) Il2CppGetMethodOffset("UnityEngine.CoreModule.dll", "UnityEngine", "Transform", "get_localPosition")
-#define Transform_set_position (uintptr_t) Il2CppGetMethodOffset("UnityEngine.CoreModule.dll", "UnityEngine", "Transform", "set_position", 1)
-*/
 uintptr_t Transform_get_position(){
 	return (uintptr_t) Il2CppGetMethodOffset("UnityEngine.CoreModule.dll", "UnityEngine", "Transform", "get_position");
 }
@@ -88,12 +71,6 @@ uintptr_t Transform_set_position(){
 }
 
 //Class Bullet
-/*
-#define Bullet_m_Id (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "Bullet", "m_Id")
-#define Bullet_m_Target (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "Bullet", "m_Target")
-#define Bullet_transform (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "Bullet", "transform")
-//#define EqualBulletSkillOwner (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "Battle", "Bullet", "EqualBulletSkillOwner", 1)
-*/
 uintptr_t Bullet_m_Id(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "Bullet", "m_Id");
 }
@@ -113,8 +90,7 @@ uintptr_t LogicPlayer_KillWildTimes(){
 uintptr_t LogicPlayer_m_PlayerData(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "LogicPlayer", "m_PlayerData");
 }
-//#define LogicPlayer_KillWildTimes (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "LogicPlayer", "_KillWildTimes")
-//#define LogicPlayer_m_PlayerData (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "LogicPlayer", "m_PlayerData")
+
 #define LogicPlayer_LogicUpdate (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "Battle", "LogicPlayer", "LogicUpdate", 1)
 #define LogicPlayer__QuadraKillTimes (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "LogicPlayer", "_QuadraKillTimes")
 
@@ -135,8 +111,6 @@ public:
 	}
 };
 
-
-//#define LogicBattleEndCtrl_get_logicBattleManager (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "LogicBattleEndCtrl","get_logicBattleManager")
 uintptr_t LogicBattleEndCtrl_get_logicBattleManager(){
 	return (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "LogicBattleEndCtrl","get_logicBattleManager");
 }
@@ -159,17 +133,10 @@ uintptr_t LogicBattleManager_GetPlayerRealSelf(){
 uintptr_t LogicBattleManager_mState(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "LogicBattleManager", "m_iMemState");
 }
-//#define LogicBattleManager_GetPlayerRealSelf (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "LogicBattleManager", "GetPlayerRealSelf")
-//#define LogicBattleManager_mState (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "LogicBattleManager", "m_iMemState")
-/*
-#define ShowSelfPlayer_OnUpdate (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "ShowSelfPlayer", "Unity_OnUpdate",0)
-#define ShowSelfPlayer_TryUseSkill (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "ShowSelfPlayer", "TryUseSkill", 10)
-*/
 uintptr_t BattleData_m_BattleBridge, BattleData_battleManager;
 uintptr_t HookTryUseSkill2;
 void loadBattleData(std::string bData) {
     if(bData == "true"){
-		//HookTryUseSkill2 = (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "ShowSelfPlayer", "TryUseSkill", 9);
 		BattleData_m_BattleBridge = (uintptr_t) Il2CppGetStaticFieldOffset("Assembly-CSharp.dll", "", "BattleData", "m_BattleBridge");
         BattleData_battleManager = (uintptr_t) Il2CppGetStaticFieldOffset("Assembly-CSharp.dll", "", "BattleManager", "Instance");
     }
@@ -302,12 +269,6 @@ uintptr_t SystemData_RoomData_iRoomOrder(){
 uintptr_t RoomData_get_strName() {
     return (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "SystemData/RoomData", "get_strName");
 }
-/*
-#define RoadData_iRealRoad (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "MTTDProto", "PlayerRealRoadInfo", "iRealRoad")
-#define RoadData_iTotalNum (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "MTTDProto", "PlayerRealRoadInfo", "iTotalNum")
-#define RoadData_iWinNum (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "MTTDProto", "PlayerRealRoadInfo", "iWinNum")
-#define RoomData_RoadInfo (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "SystemData/RoomData", "vCurSeasonRealRoadInfo")
-*/
 uintptr_t RoadData_iRealRoad(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "MTTDProto", "RealRoadInfo", "iRealRoad");
 }
@@ -355,23 +316,10 @@ uintptr_t RoomData_vCultivateRoadShow(){
 uintptr_t CmdHeroCultivateRoadShow_iRoad(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "MTTDProto", "CmdHeroCultivateRoadShow", "iRoad");
 }
-/*
-uintptr_t RecentRoadInfoSdp_vRecentRoadInfo(){
-	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "MTTDProto", "CmdHeroCultivateRoadShow", "iRoadLevel");
-}
 
-uintptr_t RecentRoadInfoSdp_vRecentRoadInfo(){
-	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "MTTDProto", "CmdHeroCultivateRoadShow", "iTitle");
-}
-*/
 //field
-/*
-#define BattleData_m_BattleBridge (uintptr_t) Il2CppGetStaticFieldOffset("Assembly-CSharp.dll", "", "BattleData", "m_BattleBridge")
-#define BattleData_battleManager (uintptr_t) Il2CppGetStaticFieldOffset("Assembly-CSharp.dll", "", "BattleData", "battleManager")
-*/
 
 #define UiHeadInfo_LateUpdate (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "UIHeadInfo", "Update")
-//#define UiHeadInfo_Update (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "BattleManager", "UnityLateUpdate")
 uintptr_t BattleBridge_ShowHeadEquip(){
 	return (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "BattleBridge", "ShowHeadEquip", 3);
 }
@@ -397,9 +345,7 @@ uintptr_t BattleManager_m_LocalPlayerShow(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "BattleManager", "m_LocalPlayerShow");
 }
 
-//#define BattleManager_m_LocalPlayerShow (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "BattleManager", "m_LocalPlayerShow")
 #define BattleManager_m_dicPlayerShow2 (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "BattleManager", "_dicPlayerShow")
-//#define BattleManager_m_dicMonsterShow (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "BattleManager", "_dicMonsterShow")
 uintptr_t BattleManager_m_ShowPlayers(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "BattleManager", "m_ShowPlayers");
 }
@@ -407,10 +353,6 @@ uintptr_t BattleManager_m_ShowPlayers(){
 uintptr_t BattleManager_m_ShowMonsters(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "BattleManager", "m_ShowMonsters");
 }
-
-//#define BattleManager_m_ShowPlayers (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "BattleManager", "_showPlayers") //m_ShowPlayerSummons
-//#define BattleManager_m_ShowMon2sters (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "BattleManager", "_showMonsters")
-//#define BattleManager_Update (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "BattleManager", "Update")
 
 uintptr_t BattleManager_m_dicPlayerShow() {
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "BattleManager", "m_dicPlayerShow");
@@ -428,10 +370,6 @@ uintptr_t PlayerData__killNum(){
 uintptr_t PlayerData__assistNum(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "PlayerData", "_assistNum");
 }
-//#define PlayerData__killNum (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "PlayerData", "_killNum")
-//#define PlayerData__assistNum (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "PlayerData", "_assistNum")
-
-//#define ShowMonster_m_Config (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowMonster", "m_Config")
 
 //Class ShowEntity
 uintptr_t ShowEntity_m_States() {
@@ -446,8 +384,6 @@ uintptr_t ShowEntity_getPosition(){
 	return (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "ShowEntity", "get_Position", 0);
 }
 
-//#define ShowEntity_getPosition (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "ShowEntity", "get_Position", 0)
-
 uintptr_t ShowEntity_MoveDir(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "_MoveDir");
 }
@@ -460,8 +396,6 @@ uintptr_t ShowEntity_m_id(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_ID");
 }
 
-//#define ShowEntity_MoveDir (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "_MoveDir")
-//#define ShowEntity_ResetLayer (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "ShowEntity", "ResetLayer", 1)
 #define ShowEntity_OnUpdate (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "ShowEntity" , "Unity_OnUpdate", 0)
 #define ShowEntity_get_InTransformation (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "ShowEntity", "get_InTransformation")
 #define ShowEntity_bShowEntityLayer (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "bShowEntityLayer")
@@ -472,18 +406,12 @@ uintptr_t ShowEntity_m_id(){
 //class LogicEntityBase
 #define LogicEntityBase_get_m_Level (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "LogicEntityBase", "m_Level")
 
-//#define ShowOwnSkillComp_m_SkillList (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "ShowOwnSkillComp", "m_SkillList")
-//#define ShowOwnSkillComp_skillUseTypeList (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "ShowOwnSkillComp", "skillUseTypeList")
 uintptr_t ShowOwnSkillComp_m_SkillList(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "ShowOwnSkillComp", "m_SkillList");
 }
 uintptr_t ShowOwnSkillComp_skillUseTypeList(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "ShowOwnSkillComp", "skillUseTypeList");
 }
-
-//#define ShowSkillData_m_TranID (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowSkillData", "m_TranID")
-
-//#define ShowPlayer_m_iSummonSkillId (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowPlayer", "m_iSummonSkillId")
 
 uintptr_t ShowSkillData_m_TranID(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowSkillData", "m_TranID");
@@ -496,12 +424,7 @@ uintptr_t ShowPlayer_m_iSummonSkillId(){
 uintptr_t ShowPlayer_m_HeroName(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowPlayer", "m_HeroName");
 }
-//#define ShowPlayer_m_HeroName (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowPlayer", "m_HeroName")
-//#define ShowPlayer_m_killNum (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowPlayer", "m_killNum")
-//#define ShowPlayer_m_assistNum (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowPlayer", "m_assistNum")
-//#define ShowPlayer_m_KillWildTimes (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowPlayer", "m_KillWildTimes")
 #define ShowPlayer_m_bInBattle (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowPlayer", "m_bInBattle")
-//#define ShowPlayer__KillWildTimes (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowPlayer", "m_KillWildTimes")
 #define ShowPlayer_Unity_OnUpdate (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "ShowPlayer", "Unity_OnUpdate")
 #define ShowPlayer_m_QuadraKillTimes (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowPlayer", "m_QuadraKillTimes")
 #define ShowPlayer_m_PentaKillTimes (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowPlayer", "m_PentaKillTimes")
@@ -509,9 +432,6 @@ uintptr_t ShowPlayer_m_HeroName(){
 
 #define ShowEntityBase_m_dMoveSpeed (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_dMoveSpeed")
 #define EntityBase_m_iType (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_iType")
-/*#define EntityBase_m_bSameCampType (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_bSameCampType")
-#define EntityBase_m_EntityCampType (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_EntityCampType")
-*/
 uintptr_t EntityBase_m_bSameCampType(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_bSameCampType");
 }
@@ -555,16 +475,6 @@ uintptr_t EntityBase_m_Level(){
 uintptr_t EntityBase_get_m_Level(){
 	return (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "EntityBase", "_level");
 }
-/*
-#define EntityBase_m_bDeath (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_bDeath")
-#define EntityBase_canSight (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "canSight")
-#define EntityBase_m_Hp (uintptr_t)  Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_Hp")
-#define EntityBase_m_HpMax (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_HpMax")
-#define EntityBase_m_ID (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_ID")
-#define EntityBase_m_uGuid (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_uGuid")
-#define EntityBase_m_Level (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_Level")
-#define EntityBase_get_m_Level (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "EntityBase", "_level")
-*/
 #define ShowEntityBase_m_Mp (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "EntityBase", "<m_Mp>k__BackingField")
 #define m_dRunSpeed (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "EntityBase", "m_dRunSpeed")
 #define get_m_dAtkSpeed (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "Battle", "EntityBase", "get_m_dAtkSpeed", 0)
