@@ -46,7 +46,7 @@ You lost your acount without refund that suck! we dont want to overclaim but her
   - you can extend the feature of this mod to suits your needs, thanks to its modular code
 
 * **Avoid your account from banned**
-  - to ensure your account is safe from being banned, we have made special guide you must follow
+  - to ensure your account is safe from banned, we have made special guide you must follow
   - this information only for VIP users, Why? offcourse to avoid m**nt0n detection
 
 ## Main Features
@@ -60,12 +60,12 @@ You lost your acount without refund that suck! we dont want to overclaim but her
 
 ## Build
 
-_This tutorial explain how to build ```Themaphack``` using ```ndk-build``` system and ```Termux``` as a terminal emulator to run compile script from Android phone_
+_This tutorial explain how to build `Themaphack` using `ndk-build` system and ```Termux``` as a terminal emulator to run compile script from Android phone_
 
 ### Prepare
 We have set up custom [ndk-build](https://github.com/anggorodhanumurti/themaphack/releases/tag/ndk_aide_latest) to work on this project or you can download Android ndk at its [official website](https://developer.android.com/ndk/downloads)
 - Download our custom [ndk-build](https://github.com/anggorodhanumurti/themaphack/releases/tag/ndk_aide_latest) tools
-- Install [Termux](https://termux.dev/en/) on your Android devices or just use your ```terminal/cmd``` if you build on PC
+- Install [Termux](https://termux.dev/en/) on your Android devices or just use your `terminal/cmd` if you build on PC
 
 ```Termux
 # Update repository Termux
@@ -110,29 +110,15 @@ _I assume you're using 64bit Android_
 
 1. [Download](https://github.com/anggorodhanumurti/themaphack/releases) latest 64bit TMH lib
 
-2. Open [Zarchiver](https://play.google.com/store/apps/details?id=ru.zdevs.zarchiver) go to ```Android/data/com.mobile.legends/files/dragon2017/assets/comlibs/arm64-v8a``` rename original **```libAkSoundEngine.bytes```** to **```libTMH.bytes```**
+2. Open [Zarchiver](https://play.google.com/store/apps/details?id=ru.zdevs.zarchiver) go to `Android/data/com.mobile.legends/files/dragon2017/assets/comlibs/arm64-v8a` rename original **```libAkSoundEngine.bytes```** to **```libTMH.bytes```**
 
-3. Extract TMH lib that you've just downloaded to that mlbb folder using Zarchiver. Path to extract: ```Android/data/com.mobile.legends/files/dragon2017/assets/comlibs/arm64-v8a```
+3. Extract TMH lib that you've just downloaded to that mlbb folder using Zarchiver. Path to extract: `Android/data/com.mobile.legends/files/dragon2017/assets/comlibs/arm64-v8a`
 
 4. You must have a key before login to modmenu. Get a key [here](https://t0pgamemurah.xyz/freeKey) after you got a key, just Copy that key!
 
 5. TMH is installed succesfully. Now open MLBB game and when mod menu appear Paste the key to Login
 
 ## FAQ
-
-This software uses the following open source packages:
-
-- [Electron](http://electron.atom.io/)
-- [Node.js](https://nodejs.org/)
-- [Marked - a markdown parser](https://github.com/chjj/marked)
-- [showdown](http://showdownjs.github.io/showdown/)
-- [CodeMirror](http://codemirror.net/)
-- Emojis are taken from [here](https://github.com/arvida/emoji-cheat-sheet.com)
-- [highlight.js](https://highlightjs.org/)
-
-## Related
-
-[Try Web version of Markdownify](https://notepad.js.org/markdown-editor/)
 
 ## Support
 
@@ -143,8 +129,6 @@ This software uses the following open source packages:
 <a href="https://www.patreon.com/">
 	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
 </a>
-
-## You may also like...
 
 ## License
 
