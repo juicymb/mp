@@ -13,8 +13,8 @@
   </a>
   <a href="https://github.com/anggorodhanumurti/themaphack/releases/"><img src="https://img.shields.io/github/tag/anggorodhanumurti/themaphack?include_prereleases=&sort=semver&color=blue" alt="GitHub tag"></a>
 <a href="#license"><img src="https://img.shields.io/badge/License-GPL_3.0-blue" alt="License"></a>
-  <a href="https://www.paypal.me/">
-    <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
+  <a href="https://www.patreon.com/themaphack">
+    <img src="https://img.shields.io/badge/$-Support-ff69b4.svg?maxAge=2592000&amp;style=flat">
   </a>
 </p>
 
@@ -46,8 +46,8 @@ You lost your acount without refund that suck! we dont want to overclaim but her
   - you can extend the feature of this mod to suits your needs, thanks to its modular code
 
 * **Avoid your account from banned**
-  - to ensure your account is safe from banned, we have made special guide you must follow
-  - this information only for VIP users, Why? offcourse to avoid m**nt0n detection
+  - to ensure your account is safe from banned, we have made [special guide](https://www.patreon.com/posts/guide-how-to-not-130259867?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link) you must follow
+  - this [information](https://www.patreon.com/posts/guide-how-to-not-130259867?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link) only for VIP users, Why? offcourse to avoid m**nt0n detection
 
 ## Main Features
 
@@ -114,19 +114,15 @@ _I assume you're using 64bit Android_
 
 3. Extract TMH lib that you've just downloaded to that mlbb folder using Zarchiver. Path to extract: `Android/data/com.mobile.legends/files/dragon2017/assets/comlibs/arm64-v8a`
 
-4. You must have a key before login to modmenu. Get a key [here](https://t0pgamemurah.xyz/freeKey) after you got a key, just Copy that key!
+4. You must have a key before login to modmenu. Get a key [here](https://t0pgamemurah.xyz/freeKey) after you got a key, just Copy the key! and save that key in your favorite android note app you will need that for login to modmenu.
 
-5. TMH is installed succesfully. Now open MLBB game and when mod menu appear Paste the key to Login
+5. TMH is installed succesfully! but your account is still not safe from banned. So before you open mlbb game make sure you follow this [guide](https://www.patreon.com/posts/guide-how-to-not-130259867?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link)
 
 ## FAQ
 
 ## Support
 
-<a href="https://buymeacoffee.com/" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
-<p>Or</p> 
-
-<a href="https://www.patreon.com/">
+<a href="https://www.patreon.com/themaphack">
 	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
 </a>
 
