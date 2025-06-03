@@ -46,8 +46,7 @@ You lost your acount without refund that suck! we dont want to overclaim but her
   - you can extend the feature of this mod to suits your needs, thanks to its modular code
 
 * **Avoid your account from banned**
-  - to ensure your account is safe from banned, we have made [special guide](https://www.patreon.com/posts/guide-how-to-not-130259867?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link) you must follow
-  - this [information](https://www.patreon.com/posts/guide-how-to-not-130259867?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link) only for VIP users, Why? offcourse to avoid m**nt0n detection
+  - to ensure your account is safe from banned, we have made special guide you must follow
 
 ## Main Features
 
