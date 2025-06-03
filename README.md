@@ -41,25 +41,26 @@ You lost your acount without refund that suck! we dont want to overclaim but her
   - You can generate free key (unlimited) in our [website](https://t0pgamemurah.xyz/freeKey).
   
 * Open source, Transparency & Modular
-  - feel free to use this source code as a template for your mod menu project
-  - you dont need to trust me just inspect the code yourself and build it, there is no malicious code inside
-  - you can extend the feature of this mod to suits your needs, thanks to its modular code
+  - Feel free to use this source code as a template for your mod menu project
+  
+  - Transparency is guaranteed, allowing users to inspect the source code, ensuring there are no malicious components. The modular design lets users extend the features of this mod to suit their specific needs.
 
-* **Avoid your account from banned**
-  - to ensure your account is safe from banned, we have made special guide you must follow
+* **Account Safety**
+  -  To mitigate the risk of bans, a [special guide](https://www.patreon.com/posts/guide-how-to-not-130259867?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link) is available to VIP users, aimed at avoiding detection.
 
 ## Main Features
 
 ![screenshot](https://raw.githubusercontent.com/anggorodhanumurti/themaphack/refs/heads/main/images/complete-esp.gif)
 
 * Responsive maphack
-  - once it activated it will adjust your phone screen automatically
+  - Automatically adjusts to the phone's screen resolution when activated, providing a seamless user experience.
+  
 * Complete ESP
-  - enemy health, line, box, monster hero icon, what else you name it we got it
+  - Tracks enemy health, outlines, monster hero icons, and more, enhancing situational awareness in gameplay.
 
 ## Build
 
-_This tutorial explain how to build `Themaphack` using `ndk-build` system and ```Termux``` as a terminal emulator to run compile script from Android phone_
+_An extensive tutorial is available for building Themaphack using ndk-build within the Termux terminal emulator. Detailed steps are provided:_
 
 ### Prepare
 We have set up custom [ndk-build](https://github.com/anggorodhanumurti/themaphack/releases/tag/ndk_aide_latest) to work on this project or you can download Android ndk at its [official website](https://developer.android.com/ndk/downloads)
@@ -89,7 +90,7 @@ $ git clone https://github.com/anggorodhanumurti/themaphack.git && cd themaphack
 $ ./compile.sh
 ```
 > **Note**
-> After compile script runs successfully, the outcome is an android shared library (*.so file) generated in the libs folder. Choose lib according to your android kernel version. If you're not sure you can check your phone kernel version using [64bit checker](https://play.google.com/store/apps/details?id=com.danielpolish.a64bitchecker)
+> Ensure you select the appropriate library based on your device's architecture. If you're not sure you can check your device architecture using [64bit checker](https://play.google.com/store/apps/details?id=com.danielpolish.a64bitchecker)
 - libs/arm64-v8a for 64bit
 - libs/armeabi-v7a for 32bit
 
