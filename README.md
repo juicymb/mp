@@ -12,7 +12,7 @@
   <a href="https://t0pgamemurah.xyz/freeKey"><img src="https://img.shields.io/badge/generate-key-blue?logo=keeweb&logoColor=fff" alt="generate - key">
   </a>
   <a href="https://github.com/anggorodhanumurti/themaphack/releases/"><img src="https://img.shields.io/github/tag/anggorodhanumurti/themaphack?include_prereleases=&sort=semver&color=blue" alt="GitHub tag"></a>
-  <a href="https://t.me/themaphack"><img src="https://img.shields.io/badge/Chat-Telegram-informational?logo=telegram" alt="Chat - Telegram"></a>
+  <a href="https://"><img src="https://img.shields.io/badge/Chat-Telegram-informational?logo=telegram" alt="Chat - Telegram"></a>
   <a href="https://www.patreon.com/themaphack">
   <img src="https://img.shields.io/badge/$-Support-ff69b4.svg?maxAge=2592000&amp;style=flat">
   </a>
