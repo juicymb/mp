@@ -12,10 +12,7 @@
   <a href="https://t0pgamemurah.xyz/freeKey"><img src="https://img.shields.io/badge/generate-key-blue?logo=keeweb&logoColor=fff" alt="generate - key">
   </a>
   <a href="https://github.com/anggorodhanumurti/themaphack/releases/"><img src="https://img.shields.io/github/tag/anggorodhanumurti/themaphack?include_prereleases=&sort=semver&color=blue" alt="GitHub tag"></a>
-  <a href="https://"><img src="https://img.shields.io/badge/Chat-Telegram-informational?logo=telegram" alt="Chat - Telegram"></a>
-  <a href="https://www.patreon.com/themaphack">
-  <img src="https://img.shields.io/badge/$-Support-ff69b4.svg?maxAge=2592000&amp;style=flat">
-  </a>
+  <a href="https://www.patreon.com/themaphack"><img src="https://img.shields.io/badge/Get-Latest_updates-ff69b4?logo=patreon" alt="Get - Latest updates"></a>
 </p>
 
 ![screenshot](https://raw.githubusercontent.com/anggorodhanumurti/themaphack/refs/heads/main/images/themaphack-demo.gif)
@@ -42,8 +39,8 @@ You lost your acount without refund that suck! we dont want to overclaim but her
   
 * Open source, Transparency & Modular
   - Feel free to use this source code as a template for your mod menu project
-  
-  - Transparency is guaranteed, allowing users to inspect the source code, ensuring there are no malicious components. The modular design lets users extend the features of this mod to suit their specific needs.
+  - Transparency is guaranteed, allowing users to inspect the source code, ensuring there are no malicious components.
+  - The modular design lets users extend the features of this mod to suit their specific needs.
 
 * **Account Safety**
   -  To mitigate the risk of bans, a [special guide](https://www.patreon.com/posts/guide-how-to-not-130259867?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link) is available to VIP users, aimed at avoiding detection.
@@ -119,6 +116,49 @@ _I assume you're using 64bit Android_
 5. TMH is installed succesfully! but your account is still not safe from banned. So before you open mlbb game make sure you follow this [guide](https://www.patreon.com/posts/guide-how-to-not-130259867?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link)
 
 ## FAQ
+
+> <details><summary> Click this text to get Answered?</summary>
+> Answered
+</details>
+
+**<details><summary>1. is it safe?</summary>**
+<p>
+I can not guarantee you that this mod is 100% safe from being banned, but i can minimize the banned risk up to 98% as long as you follow my guidance
+
+Why 98% its because the rest 2 % is depend on your playstyle and report from other player
+
+Playstyle means your behavior when using mod "dont make it too obvious" it will lead you to report by others player.
+
+As long as you follow [this guide](https://www.patreon.com/posts/guide-how-to-not-130259867?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link) consistently your account will be safe.
+</p>
+</details>
+
+**<details><summary>2. Why not share bypass guide in public?</summary>**
+<p>
+Offcourse due to avoid m00nt0n detection.
+The more people know this method, then the easier to patch it's security holes
+</p>
+</details>
+
+**<details><summary>3. Why key duration is only for 24hours ?</summary>**
+<p>
+Our keygen server has limited resources so by limit duration it will minimize server load
+</p>
+</details>
+
+**<details><summary>4. Why only maphack and ESP, Where the other features (room info, auto retri, enemy cooldown, auto combo heroes, etc) ?</summary>**
+<p>
+I made it like that on purpose because features you mentioned above had high banned rate.
+
+Considering that TMH source code is not obfuscated, it will be so easy for antich**t system to detect.
+</p>
+</details>
+
+**<details><summary>5. Can i have web panel source code that you used in your keygen web?</summary>**
+<p>
+Absolutely yes, just <a href="mailto:dhanumurtianggoro@gmail.com">email me</a>
+</p>
+</details>
 
 ## Support
 
