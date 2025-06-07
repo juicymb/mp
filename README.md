@@ -140,7 +140,7 @@ The more people know this method, then the easier to patch it's security holes
 </p>
 </details>
 
-**<details><summary>3. Why key duration is only for 24hours ?</summary>**
+**<details><summary>3. Why key duration is only for 24h ?</summary>**
 <p>
 Our keygen server has limited resources so by limit duration it will minimize server load
 </p>
