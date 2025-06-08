@@ -136,7 +136,7 @@ As long as you follow [this guide](https://www.patreon.com/posts/guide-how-to-no
 **<details><summary>2. Why not share bypass guide in public?</summary>**
 <p>
 Offcourse due to avoid m00nt0n detection.
-The more people know this method, then the easier to patch it's security holes
+The less people knows is better, so keep this <a href="https://www.patreon.com/checkout/themaphack?rid=26019842">valuable </a> info just for yourself
 </p>
 </details>
 
