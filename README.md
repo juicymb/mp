@@ -86,7 +86,7 @@ $ git clone https://github.com/anggorodhanumurti/themaphack.git && cd themaphack
 # Run compile script
 $ ./compile.sh
 ```
-> **Note**
+> [!NOTE]
 > Ensure you select the appropriate library based on your device's architecture. If you're not sure you can check your device architecture using [64bit checker](https://play.google.com/store/apps/details?id=com.danielpolish.a64bitchecker)
 - libs/arm64-v8a for 64bit
 - libs/armeabi-v7a for 32bit
@@ -97,8 +97,8 @@ You can [download](https://github.com/anggorodhanumurti/themaphack/releases/tag/
 - [stable-v1.1.2-64bit](https://github.com/anggorodhanumurti/themaphack/releases/tag/v1.1.2-64bit) for 64bit
 - [stable-v1.1.2-32bit](https://github.com/anggorodhanumurti/themaphack/releases/tag/v1.1.2-32bit) for 32bit
 
-> **Note:** if you install ml from playstore it's definitely 64bit. If you're not sure you can
- check your android kernel version [here](https://play.google.com/store/apps/details?id=com.danielpolish.a64bitchecker)
+> [!NOTE]
+> if you install ml from playstore it's definitely 64bit. If you're not sure you can check your android kernel version [here](https://play.google.com/store/apps/details?id=com.danielpolish.a64bitchecker)
 
 ## Usage
 ### Installation & how to get key
