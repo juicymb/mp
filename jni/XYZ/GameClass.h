@@ -402,6 +402,7 @@ uintptr_t ShowEntity_m_id(){
 #define ShowEntity_m_OwnSkillComp (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_OwnSkillComp")
 #define ShowEntity_m_RoleName (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_RoleName")
 #define ShowEntity_m_HeadIcon (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "", "ShowEntity", "m_HeadIconDefault")
+// thanks for youtube.com/@cheatcode-revolution
 #define ShowEntity_CanSight (uintptr_t) Il2CppGetMethodOffset("Assembly-CSharp.dll", "", "ShowEntity", "get_m_CanSight", 1)
 //class LogicEntityBase
 #define LogicEntityBase_get_m_Level (uintptr_t) Il2CppGetFieldOffset("Assembly-CSharp.dll", "Battle", "LogicEntityBase", "m_Level")
