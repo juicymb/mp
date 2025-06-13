@@ -242,7 +242,7 @@ void DrawMenu() {
                 ImGui::Spacing();
 				ImGui::Spacing();
 				if (ImGui::Button("Get a Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
-                    openURL(devv);
+                    openURL(g_vm, devv);
   				}
 
                 ImGui::Spacing();
