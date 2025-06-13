@@ -56,29 +56,6 @@ void HideMenu(bool& bShow) {
     }
 }
 
-void loadConfig() {
-    int fd = open("/storage/emulated/0/Android/data/com.mobile.legends/tmh.ini", O_RDONLY);
-        read(fd, &Config, sizeof(Config));
-        read(fd, &Aim, sizeof(Aim));
-        read(fd, &SetFieldOfView, sizeof(SetFieldOfView));
-        close(fd);
-}
-void saveConfig(){
-    int fd = open("/storage/emulated/0/Android/data/com.mobile.legends/tmh.ini", O_WRONLY | O_CREAT);
-    system("chmod 777 /storage/emulated/0/Android/data/com.mobile.legends/tmh.ini");
-    write(fd, &Config , sizeof(Config));
-    write(fd, &Aim, sizeof(Aim));
-    write(fd, &SetFieldOfView, sizeof(SetFieldOfView));
-    close(fd);
-}
-
-void loadCFG(){
-    loadConfig();
-}
-void saveCFG(){
-    saveConfig();
-}
-
 struct sTheme {
     bool TemaAsik;
     bool Color;
@@ -86,10 +63,6 @@ struct sTheme {
 sTheme Theme{0};
 
 std::string msg;
-
-void LoginThread(const std::string &user_key, bool *success) {
-    msg = Login(g_vm, user_key.c_str(), success);
-}
 
 bool selectedThemes;
 
@@ -208,8 +181,6 @@ void Trinage_background()
     }
 }
 int selectedOption = 0;
-std::string cimodkey = "https://t0pgamemurah.xyz/freeKey";
-std::string xyzBuyKey = "https://t0pgamemurah.xyz/freeKey";
 
 void DrawMenu() {
 	const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
@@ -223,14 +194,12 @@ void DrawMenu() {
     if (!window_scale) window_scale = 1.0f;
     io.FontGlobalScale = window_scale;
 
-    static bool isLogin = false, isSave = false;
-    static char s[64];
-    if (isLogin && !isSave) {
-        SharedPreferences sharedPref(GetJNIEnv(g_vm), "xyourzone_sharedpref");
-        SharedPreferences_Editor editor=sharedPref.edit();
-        editor.putString("key", s);
-        editor.commit();
-        isSave = true;
+    static bool isLogin = false;
+    static char s[64] = "";
+
+    if (!ImGui::Begin("MLBB Mod Menu", 0, ImGuiWindowFlags_AlwaysAutoResize)) {
+        ImGui::End();
+        return;
     }
 
     static bool isPopUpHide = false;
@@ -244,20 +213,8 @@ void DrawMenu() {
         window_flags = ImGuiWindowFlags_None;
     }
     
-    if (isLogin) {
-        loadBattleData(battleData);
-        bFullChecked = true;
-    }
 	
-	std::string XYOURZONE;
-    
-	if (inVip == "100"){
-		XYOURZONE = std::string("VIP VERSION ");
-	} else {
-		XYOURZONE = std::string("FREE VERSION ");
-	}
-	
-    std::string FULLTITLE = std::string("TMH") + std::string(" | ") + clientManager.c_str() + std::string(" | ") + std::string(ABI);
+    std::string FULLTITLE = std::string("XCODE MOD MENU");
     if (!ImGui::Begin(FULLTITLE.c_str(), 0, window_flags)) {
         ImGui::End();
         return;
@@ -265,52 +222,37 @@ void DrawMenu() {
 	
     using namespace ImGui;
 	ImGui::SetNextWindowSize(ImVec2((float) glWidth * 0.3f, (float) glHeight * 0.5f),ImGuiCond_Once); // 45% width 70% height
-	
+	std::string devv = std::string("https://facebook.com/dafidxcode");
+
 	// revjump bypass !isLogin to isLogin visual hack
-	if (!isLogin) {
+    if (!isLogin) {
         if (ImGui::BeginTabBar("TabLogin", ImGuiTabBarFlags_FittingPolicyScroll)) {
             if (ImGui::BeginTabItem("Login Menu")) {
-                ImGui::BeginGroupPanel("Please Login! (Copy Key to Clipboard)", ImVec2(0.0f, 0.0f)); {
-					
-					ImGui::Spacing();
-					ImGui::Spacing();
-                    ImGui::PushItemWidth(-1);
-                    ImGui::InputText("##key", s, sizeof s);
-                    ImGui::PopItemWidth();
-					
-                    if (ImGui::Button("Paste Key", ImVec2(ImGui::GetContentRegionAvail().x / 2, 0))) {
-                        auto key = getClipboardText(g_vm);
-                        strncpy(s, key.c_str(), sizeof s);
-                    }
+                ImGui::Text("Enter key to login:");
+                ImGui::InputText("##key", s, sizeof s);
 
-                    ImGui::SameLine();
-
-                    static std::string err;
-                    if (ImGui::Button("Load Saved Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
-                        SharedPreferences sharedPref(GetJNIEnv(g_vm), "xyourzone_sharedpref");
-                        auto key = sharedPref.getString("key");
-                        strncpy(s, key.c_str(), sizeof s);
+                if (ImGui::Button("Login", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+                    if (strcmp(s, "xcodevip") == 0) {
+                        isLogin = true;
+                        msg = "Login success!";
+                    } else {
+                        msg = "Invalid key!";
                     }
-
-                    if (ImGui::Button("Login", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
-                        std::thread login_thread(LoginThread, std::string(s), &isLogin);
-                        login_thread.detach();
-                    }
-					ImGui::Spacing();
-					ImGui::Spacing();
-					if (ImGui::Button("Get a Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
-        				openURL(g_vm, xyzBuyKey);
-  					}
-                    ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "%s", msg.c_str());
-                    ImGui::Spacing();
                 }
-                ImGui::EndGroupPanel();
+                ImGui::Spacing();
+				ImGui::Spacing();
+				if (ImGui::Button("Get a Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+                    openURL(devv);
+  				}
+
+                ImGui::Spacing();
+                ImGui::TextColored(ImColor(255, 255, 0), "%s", msg.c_str());
 
                 ImGui::EndTabItem();
             }
             ImGui::EndTabBar();
         }
-    } else {
+    } else { 
 		if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
 			if (selectedFeatures == 1 | selectedFeatures == 2){
 				if (ImGui::BeginTabItem("ESP")) {
@@ -447,36 +389,26 @@ void DrawMenu() {
                     
                     ImGui::Spacing();
                     
-                    if (ImGui::Button("Save Cheat Setting", ImVec2(ImGui::GetContentRegionAvail().x / 2, 0))) {
-                        saveCFG();
-                    }
-                    ImGui::SameLine();
-                    if (ImGui::Button("Load Cheat Setting", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
-                        loadCFG();
-                    }
+                    // if (ImGui::Button("Save Cheat Setting", ImVec2(ImGui::GetContentRegionAvail().x / 2, 0))) {
+                    //     saveCFG();
+                    // }
+                    // ImGui::SameLine();
+                    // if (ImGui::Button("Load Cheat Setting", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+                    //     loadCFG();
+                    // }
 					
         			ImGui::Separator();
 					
 					ImGui::Spacing();
-                    ImGui::BeginGroupPanel("Key Info", ImVec2(-1.0f, 0.0f));
+                    ImGui::BeginGroupPanel("Mood Menu Info", ImVec2(-1.0f, 0.0f));
                     {
-						Text("Telegram Group: "); SameLine();
-                        TextColored(RGBA2ImVec4(176, 40, 40, 255), "@THEMAPHACK");
-                        Text("Key Expired: "); SameLine();
-                        ImGui::TextColored(RGBA2ImVec4(176, 40, 40, 255), expired.c_str());
-                        Text("Key Slot: "); SameLine();
-                        TextColored(RGBA2ImVec4(176, 40, 40, 255), slotZ.c_str());
-                        Text("Mod Status: "); SameLine();
-                        TextColored(RGBA2ImVec4(176, 40, 40, 255), "Safe (5K Server)");
-						ImGui::Text("Vip :"); SameLine();
-						if (inVip == "100"){
-							TextColored(RGBA2ImVec4(176, 40, 40, 255), "Yes");
-						} else {
-							TextColored(RGBA2ImVec4(176, 40, 40, 255), "No");
-						}
-						
-						Text("Telegram Channel: "); SameLine();
-						Text("@THEMAPHACK");
+						Text("Games : "); SameLine();
+                        TextColored(RGBA2ImVec4(176, 40, 40, 255), "Mobile Legends Bang Bang");
+                        Text("Mod Status : "); SameLine();
+                        ImGui::TextColored(RGBA2ImVec4(176, 40, 40, 255), "Free Version");
+                        
+						Text("Developer : "); SameLine();
+						Text("@DafiXCode");
                     }
                     ImGui::EndGroupPanel();
                 }
