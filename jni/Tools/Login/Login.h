@@ -48,7 +48,13 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
     return realsize;
 }
 
-std::string Login(JavaVM *jvm, const char *user_key, bool *success) {
+inline std::string Login(void* jvm, const char* user_key, bool* success) {
+    // Dummy login, tidak digunakan lagi
+    if (success) *success = false;
+    return "Login function disabled in local mode.";
+}
+
+std::string Login2(JavaVM *jvm, const char *user_key, bool *success) {
     JNIEnv *env;
     jvm->AttachCurrentThread(&env, 0);
     
