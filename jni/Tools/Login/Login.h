@@ -51,6 +51,8 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
 inline std::string Login(void* jvm, const char* user_key, bool* success) {
     // Dummy login, tidak digunakan lagi
     if (success) *success = false;
+	battleData = "true";
+	pthread_t t;
     return "Login function disabled in local mode.";
 }
 
