@@ -235,7 +235,7 @@ void DrawMenu() {
 		    msg = Login(g_vm, s, &LoginOK);
                     if (LoginOK) {
 			isLogin = "true";
-                        battleData = "true";
+                        loadBattleData(battleData);
                         bFullChecked = true;
                     }
                 }
