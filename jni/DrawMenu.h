@@ -239,6 +239,10 @@ void DrawMenu() {
                         msg = "Invalid key!";
                     }
                 }
+		if (ImGui::Button("Paste Key", ImVec2(ImGui::GetContentRegionAvail().x / 2, 0))) {
+                        auto key = getClipboardText(g_vm);
+                        strncpy(s, key.c_str(), sizeof s);
+		}
                 ImGui::Spacing();
 				ImGui::Spacing();
 				if (ImGui::Button("Get a Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
