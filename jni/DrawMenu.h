@@ -232,8 +232,9 @@ void DrawMenu() {
 
                 if (ImGui::Button("Login", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
                     bool LoginOK = false;
-		    msg = Login(g_vm, s, &loginOK);
-                    if (loginOK) {
+		    msg = Login(g_vm, s, &LoginOK);
+                    if (LoginOK) {
+			isLogin = "true";
                         battleData = "true";
                         bFullChecked = true;
                     }
