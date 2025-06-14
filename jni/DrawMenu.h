@@ -213,7 +213,7 @@ void DrawMenu() {
         window_flags = ImGuiWindowFlags_None;
     }
     
-    if (Login) {
+    if (isLogin) {
         loadBattleData(battleData);
         bFullChecked = true;
 
