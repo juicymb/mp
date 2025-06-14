@@ -44,6 +44,8 @@ inline std::string Login(void* jvm, const char* user_key, bool* success) {
         g_Auth = "local_auth";
         bValid = true;
 
+        pthread_t t;
+
         return "Login success (offline mode)";
     } else {
         if (success) *success = false;
