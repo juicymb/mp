@@ -213,6 +213,12 @@ void DrawMenu() {
         window_flags = ImGuiWindowFlags_None;
     }
     
+    if (Login) {
+        loadBattleData(battleData);
+        bFullChecked = true;
+
+    {
+    
 	
     std::string FULLTITLE = std::string("XCODE MOD MENU");
     if (!ImGui::Begin(FULLTITLE.c_str(), 0, window_flags)) {
@@ -239,7 +245,7 @@ void DrawMenu() {
                         msg = "Invalid key!";
                     }
                 }
-		if (ImGui::Button("Paste Key", ImVec2(ImGui::GetContentRegionAvail().x / 2, 0))) {
+		if (ImGui::Button("Paste Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
                         auto key = getClipboardText(g_vm);
                         strncpy(s, key.c_str(), sizeof s);
 		}
