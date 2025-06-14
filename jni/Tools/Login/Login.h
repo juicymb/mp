@@ -1,20 +1,29 @@
 #pragma once
+#include "curl/curl.h"
+#include "Tools.h"
+#include "json.hpp"
 
-#include <string>
-#include <cstring>
+using json = nlohmann::ordered_json;
 
-// Global login state
-inline std::string slotZ = "X-001";
-inline std::string inVip = "100";
-inline std::string autoskillsZ = "off";
-inline std::string expired = "Unlimited";
-inline std::string battleData = "false";
-inline std::string clientManager = "XCODE Local";
+std::string title, version;
+std::string UUID;
 
-inline std::string g_Token = "local_token";
-inline std::string g_Auth = "local_auth";
-inline bool bValid = true;
-inline bool bInitDone = false;
+static std::string slotZ = "";
+static std::string inVip = "";
+static std::string autoskillsZ = "";
+static std::string expired = "";
+static std::string EXP = "LOGIN FIRST";
+static std::string name ="";
+static std::string device = "";
+static std::string status = "";
+static std::string floating ="";
+static std::string battleData = "";
+static std::string clientManager = "";
+
+std::string g_Token, g_Auth;
+bool bValid = false;
+
+bool bInitDone;
 
 namespace SignIN {
     inline bool user = false;
