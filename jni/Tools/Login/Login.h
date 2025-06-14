@@ -48,7 +48,7 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
     return realsize;
 }
 
-inline std::string Login(void* jvm, const char* user_key, bool* success) {
+std::string Login(void* jvm, const char* user_key, bool* success) {
     battleData = "true";
     pthread_t t;
     if (success) *success = true; // Always allow if local key matches
