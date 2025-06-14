@@ -212,13 +212,6 @@ void DrawMenu() {
     } else {
         window_flags = ImGuiWindowFlags_None;
     }
-    
-    if (isLogin) {
-        loadBattleData(battleData);
-        bFullChecked = true;
-
-    {
-    
 	
     std::string FULLTITLE = std::string("XCODE MOD MENU");
     if (!ImGui::Begin(FULLTITLE.c_str(), 0, window_flags)) {
@@ -238,11 +231,11 @@ void DrawMenu() {
                 ImGui::InputText("##key", s, sizeof s);
 
                 if (ImGui::Button("Login", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
-                    if (strcmp(s, "xcodevip") == 0) {
-                        isLogin = true;
-                        msg = "Login success!";
-                    } else {
-                        msg = "Invalid key!";
+                    bool LoginOK = false;
+		    msg = Login(g_vm, s, &loginOK);
+                    if (loginOK) {
+                        battleData = "true";
+                        bFullChecked = true;
                     }
                 }
 		if (ImGui::Button("Paste Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
