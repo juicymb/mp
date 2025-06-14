@@ -14,4 +14,9 @@ inline std::string Login(void* jvm, const char* user_key, bool* success) {
     if (success) *success = true; // Always allow if local key matches
     return "Login success (offline mode)";
 }
-
+void* LoadBattleThread(void*) {
+    // misalnya kamu punya fungsi yang ambil data dari file
+    loadBattleData(battleData);  // pastikan fungsi ini ada
+    pthread_exit(nullptr);
+    return nullptr;
+}
