@@ -1,307 +1,488 @@
-#include <iostream>
-#include <stdio.h>
-#include <string>
-#include <unistd.h>
-#include <stdint.h>
-#include <inttypes.h>
-#include <vector>
-#include <map>
-#include <chrono>
-#include <fstream>
-#include <thread>
-#include <pthread.h>
-#include <dirent.h>
-#include <libgen.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <sys/uio.h>
-#include <fcntl.h>
-#include <jni.h>
-#include <android/log.h>
-#include <elf.h>
-#include <dlfcn.h>
-#include <sys/system_properties.h>
-#include <EGL/egl.h>
-#include <GLES3/gl3.h>
+bool showMenu = true;
+bool bFullChecked = false;
+int selectedFeatures = 1;
+android_app *i_App = 0;
 
-#include <android/log.h>
-#include <android/asset_manager.h>
-#include <android/asset_manager_jni.h>
-#include <android/native_window.h>
-
-#include <cstdlib>
-#include <cstdio>
-#include <cstring>
-
-#define _GNU_SOURCE
-#include <stdio.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <dlfcn.h>
-
-// internal module start here
-#define IMGUI_DEFINE_MATH_OPERATORS
-
-#include "imgui.h"
-#include "imgui_additional.h"
-#include "imgui_themes.h"
-#include <android_native_app_glue.h>
-#include "backends/imgui_impl_android.h"
-#include "backends/imgui_impl_opengl3.h"
-#include "fonts/GoogleSans.h"
-#include "imgui/icon.h"
-
-#include "KittyMemory/MemoryPatch.h"
-
-#include "Includes/Logger.h"
-#include "Includes/Utils.h"
-#include "Includes/Macros.h"
-
-#include "Tools/xDL/xdl.h"
-#include "Tools/fake_dlfcn.h"
-#include "Tools/Il2Cpp.h"
-#include "Tools/Tools.h"
-
-#include "XYZ/Unity/Struct/Vector3.hpp"
-#include "XYZ/Unity/Struct/Vector2.h"
-#include "XYZ/Unity/Struct/Rect.h"
-#include "XYZ/Unity/Struct/Quaternion.h"
-#include "XYZ/ConfigName.h"
-#include "Config/setup.h"
-#include "Config/JNIStuff.h"
-#include "Config/TouchSystem.h"
-#include "XYZ/IconMinimap/DrawIcon.h"
-#include "Tools/Login/Login.h"
-#include "XYZ/GameClass.h"
-#include "XYZ/ToString.h"
-#include "XYZ/SDK.h"
-#include "XYZ/DrawMinimap.h"
-#include "XYZ/Minimap.h"
-#include "XYZ/DrawESP.h"
-#include "XYZ/Bypass.h"
-#include "XYZ/RInfo.h"
-#include "DrawMenu.h"
-
-#undef stderr
-#undef stdout
-#undef stdin
-
-#include <iostream>
-#include <chrono>
-#include <ctime>
-#include <sstream>
-#include <iomanip>
-#include <thread> // Added for sleep
-
-using std::chrono::seconds;
-using std::this_thread::sleep_for;
-
-#include "xHook/xhook.h"
-#include "consolas.hpp"
-#include "Render.h"
-
-#define FindLib "libil2cpp.so"
-#define FindLib "liblogic.so"
-#define FindLib "libunity.so"
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <unistd.h>
-
-bool PatchOffset(uintptr_t address, const void *buffer, size_t length) {
-	unsigned long page_size = sysconf(_SC_PAGESIZE);
-    unsigned long size = page_size * sizeof(uintptr_t);
-    return mprotect((void *)(address - (address % page_size) - page_size), (size_t) size, PROT_EXEC | PROT_READ | PROT_WRITE) == 0 && memcpy((void *)address, (void *)buffer, length) != 0;
+unsigned int gpCrash = 0xfa91b9cd;
+static int crash(int randomval){
+    volatile int *p = (int *)gpCrash;
+    p += randomval;
+    p += *p + randomval;
+    p = 0;
+    p += *p;
+    return *p;
 }
 
-void detectDump() {
-    std::ifstream mapsFile("/proc/self/maps");
-    std::string line;
+void CenteredText(ImColor color, const char *fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    const char *text, *text_end;
+    ImFormatStringToTempBufferV(&text, &text_end, fmt, args);
+    ImGui::SetCursorPosX((ImGui::GetWindowSize().x - ImGui::CalcTextSize(text, text_end).x) * 0.5);
+    ImGui::TextColoredV(color, fmt, args);
+    va_end(args);
+}
 
-    while (std::getline(mapsFile, line)) {
-        if (line.find("liblua") != std::string::npos || line.find(".lua") != std::string::npos) {
-            std::cerr << "[dump detected everything is stored ." << std::endl;
-            kill(getpid(), SIGKILL);
+inline ImVec4 RGBA2ImVec4(int r, int g, int b, int a) {
+    float newr = (float)r / 255.0f;
+    float newg = (float)g / 255.0f;
+    float newb = (float)b / 255.0f;
+    float newa = (float)a / 255.0f;
+    return ImVec4(newr, newg, newb, newa);
+}
+
+void HideMenu(bool& bShow) {
+    if (bShow) {
+        ImGui::OpenPopup("ConfirmHide");
+    }
+
+    ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+    if (ImGui::BeginPopupModal("ConfirmHide", 0, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse))
+    {
+        ImGui::Text("Are you sure you want to hide the menu?");
+        if (ImGui::Button("Yes", ImVec2(ImGui::GetContentRegionAvail().x / 2, 0)))
+        {
+            showMenu = false;
+            bShow = false;
+            ImGui::CloseCurrentPopup();
         }
+        ImGui::SameLine();
+        if (ImGui::Button("No", ImVec2(ImGui::GetContentRegionAvail().x, 0)))
+        {
+            bShow = false;
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::EndPopup();
     }
 }
 
+struct sTheme {
+    bool TemaAsik;
+    bool Color;
+};
+sTheme Theme{0};
 
-int yaserClose() {
-    JavaVM* java_vm = i_App->activity->vm;
-    JNIEnv* java_env = NULL;
-    jint jni_return = java_vm->GetEnv((void**)&java_env, JNI_VERSION_1_6);
-    if (jni_return == JNI_ERR)
-        return -1;
-    jni_return = java_vm->AttachCurrentThread(&java_env, NULL);
-    if (jni_return != JNI_OK)
-        return -2;
-    jclass native_activity_clazz = java_env->GetObjectClass(i_App->activity->clazz);
-    if (native_activity_clazz == NULL)
-        return -3;
-    jmethodID method_id = java_env->GetMethodID(native_activity_clazz, "AndroidThunkJava_RestartGame","()V");
-    if (method_id == NULL)
-        return -4;
-    java_env->CallVoidMethod(i_App->activity->clazz, method_id);
-    jni_return = java_vm->DetachCurrentThread();
-    if (jni_return != JNI_OK)
-        return -5;
-    return 0;
-}
-bool isyaserFolderHere(const std::string& folderPath) {
-    return (access(folderPath.c_str(), F_OK) == 0);
-}
+std::string msg;
 
-void YaserAntiCrack1() {
-    std::string folderPath = "/storage/emulated/0/Android/data/com.guoshi.httpcanary"
-    "/storage/emulated/0/Android/data/com.sniffer"
-    "/storage/emulated/0/Android/data/com.guoshi.httpcanary.premium"
-    "/storage/emulated/0/Android/data/com.httpcanary.pro"
-    "/storage/emulated/0/Android/data/com.minhui.networkcapture"
-    "/storage/emulated/0/Android/data/app.greyshirts.sslcapture"
-    "/storage/emulated/0/Android/data/com.emanuelef.remote_capture"
-    "/storage/emulated/0/Android/data/com.minhui.networkcapture.pro";
-    if (isyaserFolderHere(folderPath)) {
-        yaserClose();
-    } else {
-        
-    }
-}
+bool selectedThemes;
 
-bool IsVPNEnabled() {
-    JNIEnv *env;
-    g_vm->AttachCurrentThread(&env, 0);
-    jclass ctx = env->FindClass("android/content/Context");
-    jobject context = getJNIContext(env);
-    jmethodID service = env->GetMethodID(ctx, "getSystemService", "(Ljava/lang/String;)Ljava/lang/Object;");
-    jstring str = env->NewStringUTF("connectivity");
-    jobject conn_service = env->CallObjectMethod(context, service, str);
-    env->DeleteLocalRef(str);
-    jclass connectivity = env->FindClass("android/net/ConnectivityManager");
-    jclass capabils = env->FindClass("android/net/NetworkCapabilities");
-    jmethodID has1 = env->GetMethodID(capabils, "hasCapability", "(I)Z");
-    jmethodID has = env->GetMethodID(capabils, "hasTransport", "(I)Z");
-    jmethodID getCapabil = env->GetMethodID(connectivity, "getNetworkCapabilities", "(Landroid/net/Network;)Landroid/net/NetworkCapabilities;");
-    jmethodID getActive = env->GetMethodID(connectivity, "getActiveNetwork", "()Landroid/net/Network;");
-    jobject activenetwork = env->CallObjectMethod(conn_service, getActive);
-    jobject activecapabilities = env->CallObjectMethod(conn_service, getCapabil, activenetwork);
-    jboolean hasvpn1 = env->CallBooleanMethod(activecapabilities, has, 4);
-    jboolean hasvpn2 = env->CallBooleanMethod(activecapabilities, has1, 4);
-    if (hasvpn1 || hasvpn2) {
-        env->DeleteLocalRef(activenetwork);
-        env->DeleteLocalRef(activecapabilities);
-        env->DeleteLocalRef(conn_service);
-        env->DeleteLocalRef(ctx);
-        env->DeleteLocalRef(context);
-        env->DeleteLocalRef(capabils);
-        env->DeleteLocalRef(connectivity);
-        return true;
-    } else {
-        env->DeleteLocalRef(activenetwork);
-        env->DeleteLocalRef(activecapabilities);
-        env->DeleteLocalRef(conn_service);
-        env->DeleteLocalRef(ctx);
-        env->DeleteLocalRef(context);
-        env->DeleteLocalRef(capabils);
-        env->DeleteLocalRef(connectivity);
-        return false;
-    }
-}
+inline ImColor main_color(230, 134, 224, 255);
 
+inline ImColor text_color[3] = {ImColor(255, 255, 255, 255), ImColor(200, 200, 200, 255), ImColor(150, 150, 150, 255) };
 
-bool FileExists(const std::string& filename) {
-    std::ifstream file(filename);
-    return file.good();
-}
+inline ImColor foreground_color(1.f, 1.f, 1.f, 0.15f);
 
-void eglSwapBuffers_handler(RegisterContext * ctx, const HookEntryInfo * info)
+inline ImColor background_color(13, 14, 16, 200);
+
+inline ImColor second_color(255, 255, 255, 20);
+
+inline ImColor stroke_color(35, 35, 35, 255);
+
+inline ImColor child_color(19, 19, 19, 255);
+
+inline ImColor scroll_bg_col(24, 24, 24, 255);
+
+inline ImColor winbg_color(15, 16, 18, 200);
+
+inline ImFont* icon_font;
+
+inline ImFont* logo_font;
+
+inline ImFont* icon_big_font;
+
+inline ImFont* medium_font;
+
+inline ImFont* small_font;
+
+inline ImFont* small_icon_font;
+
+inline ImFont* arrow_icons;
+
+inline float anim_speed = 8.f;
+
+static inline ImDrawList* foremenu_drawlist;
+
+inline ImColor GetColorWithAlpha(ImColor color, float alpha)
 {
-    static int count = 0;
-    if(count < 10){
-        count++;
-    }else{
-        Render();
+return ImColor(color.Value.x, color.Value.y, color.Value.z, alpha);
+}
+
+inline ImVec2 center_text(ImVec2 min, ImVec2 max, const char* text)
+{
+    return min + (max - min) / 2 - ImGui::CalcTextSize(text) / 2;
+}
+
+inline int rotation_start_index;
+inline void ImRotateStart()
+{
+    rotation_start_index = ImGui::GetWindowDrawList()->VtxBuffer.Size;
+}
+
+inline ImVec2 ImRotationCenter()
+{
+    ImVec2 l(FLT_MAX, FLT_MAX), u(-FLT_MAX, -FLT_MAX); // bounds
+
+    const auto& buf = ImGui::GetWindowDrawList()->VtxBuffer;
+    for (int i = rotation_start_index; i < buf.Size; i++)
+        l = ImMin(l, buf[i].pos), u = ImMax(u, buf[i].pos);
+
+    return ImVec2((l.x + u.x) / 2, (l.y + u.y) / 2); // or use _ClipRectStack?
+}
+
+inline void ImRotateEnd(float rad, ImVec2 center = ImRotationCenter())
+{
+    float s = sin(rad), c = cos(rad);
+    center = ImRotate(center, s, c) - center;
+
+    auto& buf = ImGui::GetWindowDrawList()->VtxBuffer;
+    for (int i = rotation_start_index; i < buf.Size; i++)
+        buf[i].pos = ImRotate(buf[i].pos, s, c) - center;
+}
+
+void Trinage_background()
+{
+
+    ImVec2 screen_size = ImVec2(glWidth, glHeight);
+
+    static ImVec2 partile_pos[100];
+    static ImVec2 partile_target_pos[100];
+    static float partile_speed[100];
+    static float partile_size[100];
+    static float partile_radius[100];
+    static float partile_rotate[100];
+
+    for (int i = 1; i < 50; i++)
+    {
+        if (partile_pos[i].x == 0 || partile_pos[i].y == 0)
+        {
+            partile_pos[i].x = rand() % (int)screen_size.x + 1;
+            partile_pos[i].y = screen_size.y + 30;
+            partile_speed[i] = 70 + rand() % 135;
+            partile_radius[i] = 2 + rand() % 10;
+            partile_size[i] = 15 + rand() % 40;
+
+            partile_target_pos[i].x = rand() % (int)screen_size.x;
+            partile_target_pos[i].y = -50;
+        }
+
+        partile_pos[i].y -= ImGui::GetIO().DeltaTime * partile_speed[i];
+        partile_rotate[i] -= ImGui::GetIO().DeltaTime;
+
+        if (partile_pos[i].y < 10)
+        {
+            partile_pos[i].x = 0;
+            partile_pos[i].y = 0;
+            partile_rotate[i] = 0;
+        }
+
+        ImRotateStart();
+        ImGui::GetWindowDrawList()->AddRectFilled(partile_pos[i] - ImVec2(partile_size[i], partile_size[i]), partile_pos[i] + ImVec2(partile_size[i], partile_size[i]), GetColorWithAlpha(main_color, 0.3f), 5.f);
+        ImRotateEnd(partile_rotate[i]);
     }
 }
+int selectedOption = 0;
 
-void *bypassMemcmp(void *arg) {
-    void *handle = dlopen("libc.so", RTLD_LAZY);
-    if (!handle) return NULL;
+void DrawMenu() {
+	const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
+	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2(650, 680), ImGuiCond_FirstUseEver);
 
-    void *memcmpAddr = dlsym(handle, "memcmp");
-    if (!memcmpAddr) return NULL;
+    ImGuiIO& io = ImGui::GetIO();
 
-    uint8_t patch[] = { 0x01, 0x00, 0xA0, 0xE3 }; // MOV R0, #1 (Always return success)
-    mprotect((void *)((uintptr_t)memcmpAddr & ~0xFFF), 0x1000, PROT_READ | PROT_WRITE | PROT_EXEC);
-    memcpy(memcmpAddr, patch, sizeof(patch));
-    return NULL;
-}
+    static float window_scale;
+    if (!window_scale) window_scale = 1.0f;
+    io.FontGlobalScale = window_scale;
 
-void hideLibrary() {
-    //unlink("/proc/self/maps");
-    char path[64];
-    sprintf(path, "/proc/%d/maps", getpid());
-    unlink(path);
-}
+    static bool isLogin = false;
+    static char s[64] = "";
 
-void *main_thread(void *) {
-    while (!m_IL2CPP) {
-        m_IL2CPP = Tools::GetBaseAddress("liblogic.so");
-        sleep(1);
+    if (!ImGui::Begin("MLBB Mod Menu", 0, ImGuiWindowFlags_AlwaysAutoResize)) {
+        ImGui::End();
+        return;
     }
-    LOGI("Initialized Logic");
-    Il2CppAttach("liblogic.so");
-    sleep(5);
 
-	hideLibrary();
-	
-	DobbyInstrument(dlsym(RTLD_NEXT, "eglSwapBuffers"), eglSwapBuffers_handler);
-	
-	Tools::Hook((void *) AntiCheatReporter_StartBattle, (void *) iAntiCheatReporter_StartBattle, (void **) &oAntiCheatReporter_StartBattle);
-    Tools::Hook((void *) AntiCheatReporter_EndBattle, (void *) iAntiCheatReporter_StartBattle, (void **) &oAntiCheatReporter_StartBattle);
-    Tools::Hook((void *) AntiCheatReporter_OnReleaseUseSkill, (void *) iAntiCheatReporter_OnReleaseUseSkill, (void **) &oAntiCheatReporter_OnReleaseUseSkill);
-    Tools::Hook((void *) AntiCheatReporter_OnTryUseSkill, (void *) iAntiCheatReporter_OnTryUseSkill, (void **) &oAntiCheatReporter_OnTryUseSkill);
-    Tools::Hook((void *) AntiCheatReporter_OnTryUseSkill2, (void *) iAntiCheatReporter_OnTryUseSkill2, (void **) &oAntiCheatReporter_OnTryUseSkill2);
-    Tools::Hook((void *) AntiCheatReporter_OnRequestSkillMsg, (void *) iAntiCheatReporter_OnRequestSkillMsg, (void **) &oAntiCheatReporter_OnRequestSkillMsg);
-    Tools::Hook((void *) AntiCheatReporter_HasSkillInfo, (void *) iAntiCheatReporter_HasSkillInfo, (void **) &oAntiCheatReporter_HasSkillInfo);
+    static bool isPopUpHide = false;
+    HideMenu(isPopUpHide);
     
-	Tools::Hook((void *) ShowBattleControl_SetAntiCheatReport, (void *) iSetAntiCheatReport, (void **) &oSetAntiCheatReport);
-	
-    pthread_t t;
-    return 0;
-}
-
-void *g_Il2CppInitFunc, *g_Il2CppSymFunc;
-
-jint (JNICALL *Real_JNI_OnLoad)(JavaVM *vm, void *reserved);
-JNIEXPORT jint JNICALL Call_JNI_OnLoad(JavaVM *vm, void *reserved) {
-    std::string apkPkg = getPackageName(GetJNIEnv(g_vm));
-    std::string fromPath = std::string("/sdcard/Android/data/") + apkPkg.c_str() + std::string("/files/dragon2017/assets/comlibs/") + std::string(ARCH) + std::string("/libTMH.bytes");
-    std::string toPath = std::string("/data/user/0/") + apkPkg.c_str() + std::string("/app_libs/libTMH.bytes");
- 
-    CopyFile(fromPath.c_str(), toPath.c_str());
-    if (!g_Il2CppInitFunc)g_Il2CppInitFunc = dlopen(toPath.c_str(), RTLD_LAZY);
-    if (!g_Il2CppInitFunc)g_Il2CppInitFunc = dlopen(fromPath.c_str(), RTLD_LAZY);
-        
-    if (!g_Il2CppSymFunc)g_Il2CppSymFunc = dlsym(g_Il2CppInitFunc, "JNI_OnLoad");
-    
-    auto AkLoad = (jint(*)(JavaVM *, void *))g_Il2CppSymFunc;
-    AkLoad(vm, nullptr);
-    
-    return JNI_VERSION_1_6;
-}
-
-JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
-    g_vm = vm;
-    JNIEnv *env;
-    if (vm->GetEnv(reinterpret_cast<void **>(&env), JNI_VERSION_1_6) != JNI_OK) {
-        return JNI_ERR;
+    static bool bFlagAutoResize = true;
+    static ImGuiWindowFlags window_flags;
+    if (bFlagAutoResize) {
+        window_flags = ImGuiWindowFlags_AlwaysAutoResize;
+    } else {
+        window_flags = ImGuiWindowFlags_None;
     }
-    pthread_t t;
-    pthread_create(&t, NULL, main_thread, nullptr);
-	//pthread_create(&t, NULL, bypassMemcmp, NULL);
-	//pthread_create(&t, nullptr, libentec, nullptr);
-    return Call_JNI_OnLoad(vm, reserved);
+	
+    std::string FULLTITLE = std::string("XCODE MOD MENU");
+    if (!ImGui::Begin(FULLTITLE.c_str(), 0, window_flags)) {
+        ImGui::End();
+        return;
+    }
+	
+    using namespace ImGui;
+	ImGui::SetNextWindowSize(ImVec2((float) glWidth * 0.3f, (float) glHeight * 0.5f),ImGuiCond_Once); // 45% width 70% height
+	std::string devv = std::string("https://facebook.com/dafidxcode");
+
+	// revjump bypass !isLogin to isLogin visual hack
+    if (!isLogin) {
+        if (ImGui::BeginTabBar("TabLogin", ImGuiTabBarFlags_FittingPolicyScroll)) {
+            if (ImGui::BeginTabItem("Login Menu")) {
+                ImGui::Text("Enter key to login:");
+                ImGui::InputText("##key", s, sizeof s);
+
+                if (ImGui::Button("Login", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+                    bool LoginOK = false;
+                    msg = Login(g_vm, s, &LoginOK);
+                    if (LoginOK) {
+                    	isLogin = true;
+                        loadBattleData(battleData);
+                        bFullChecked = true;
+                    }
+                }
+		if (ImGui::Button("Paste Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+                        auto key = getClipboardText(g_vm);
+                        strncpy(s, key.c_str(), sizeof s);
+		}
+        ImGui::Spacing();
+		ImGui::Spacing();
+		if (ImGui::Button("Get a Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+			openURL(g_vm, devv);
+		}
+
+        ImGui::Spacing();
+        ImGui::TextColored(ImColor(255, 255, 0), "%s", msg.c_str());
+
+            ImGui::EndTabItem();
+            }
+            ImGui::EndTabBar();
+        }
+    } else { 
+		if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
+			
+			if (selectedFeatures == 1 | selectedFeatures == 2){
+				if (ImGui::BeginTabItem("ESP Player")) {
+            	if (ImGui::CollapsingHeader("Player")) {
+                	if (ImGui::BeginTable("ESPPlayer", 3)) {
+                    	ImGui::TableNextColumn();	(" Player Line", &Config.ESP.Player.Line);
+                        ImGui::TableNextColumn();	(" Player Box", &Config.ESP.Player.Box);
+                        ImGui::TableNextColumn();	(" Player Name", &Config.ESP.Player.Name);
+                        ImGui::TableNextColumn();	(" Player Hero", &Config.ESP.Player.Hero);
+                        ImGui::TableNextColumn();	(" Player Health", &Config.ESP.Player.Health);
+						ImGui::TableNextColumn();	(" Player Distance", &Config.ESP.Player.Distance);
+						ImGui::TableNextColumn();	(" Player Locator", &Config.ESP.Player.Locator2);
+                        ImGui::TableNextColumn();	(" Hero Alert", &Config.ESP.Player.Alert);
+                        ImGui::TableNextColumn();	(" Icon Hero", &Config.ESP.Player.HeroZ);
+                        ImGui::TableNextColumn();	(" Visible Check", &Config.ESP.Player.Visible);
+                        ImGui::TableNextColumn();	(" FPS v1", &Config.ESP.Player.Fps30);
+                        ImGui::TableNextColumn();	(" FPS v2", &Config.ESP.Player.Fps60);
+                        ImGui::EndTable();
+                    }
+                }
+                if (ImGui::CollapsingHeader("Monster")) {
+                	if (ImGui::BeginTable("Monster", 2)) {
+                    	ImGui::TableNextColumn();	ImGui::Checkbox(" Monster Round", &Config.ESP.Monster.Rounded);
+                        ImGui::TableNextColumn();	ImGui::Checkbox(" Monster Health", &Config.ESP.Monster.Health);
+                        ImGui::TableNextColumn();	ImGui::Checkbox(" Monster Name", &Config.ESP.Monster.Name);
+                        ImGui::TableNextColumn();	ImGui::Checkbox(" Monster Alert", &Config.ESP.Monster.Alert);
+						ImGui::TableNextColumn();	ImGui::Checkbox(" Monster Icon", &Config.ESP.Monster.Locator);
+						ImGui::TableNextColumn();	ImGui::Checkbox(" Monster Locator", &Config.ESP.Monster.Locator2);
+						ImGui::TableNextColumn();	ImGui::Checkbox(" Monster UID", &Config.m_IDConf);
+						ImGui::TableNextColumn();	ImGui::Checkbox(" Minion Locator", &Config.m_IDConf);
+                        ImGui::EndTable();
+                    }
+                }
+                ImGui::EndTabItem();
+			}
+			}
+			if (selectedFeatures == 1 | selectedFeatures == 2){
+				if (ImGui::BeginTabItem("Additional")) {
+					
+                ImGui::Checkbox("Unlock All Skins", &Config.Visual.UnlockSkin); 
+                
+                
+                
+                ImGui::EndTabItem();
+            }
+			}
+			if (selectedFeatures == 1 | selectedFeatures == 2){
+			if (ImGui::BeginTabItem("Auto Aim")) { // Tab Auto Aim
+                // Pindahkan konten Auto Aim ke dalam tab ini
+                ImGui::BeginGroupPanel("Auto Aim", ImVec2(0.0f, 0.0f));
+                ImGui::Spacing();
+                ImGui::Checkbox("Auto Aim Basic", &Aim.Helper.Skills.Basic);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::Checkbox("Auto Aim Skil 1", &Aim.Helper.Skills.Skill1);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::Checkbox("Auto Aim Skil 2", &Aim.Helper.Skills.Skill2);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::Checkbox("Auto Aim Skil 3", &Aim.Helper.Skills.Skill3);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::Checkbox("Auto Aim Skil 4", &Aim.Helper.Skills.Skill4);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::EndGroupPanel();
+                ImGui::SameLine();
+                ImGui::BeginGroupPanel("Priority", ImVec2(0.0f, 0.0f));
+                ImGui::Text("Target Priority:");
+                ImGui::RadioButton("Closest Distance", &Aim.Helper.Priority.Target, 0);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::RadioButton("Lowest HP", &Aim.Helper.Priority.Target, 1);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::Text("Range Auto Aim:");
+                ImGui::SliderFloat("##RangeFOV", &RangeFOV, 0, 200, "%.1fm");
+                ImGui::Spacing();
+                ImGui::EndGroupPanel();
+
+                ImGui::Spacing();
+                ImGui::EndTabItem(); // Akhir Tab Auto Aim
+            }
+            }
+			if (selectedFeatures == 1 | selectedFeatures == 2){
+				if (ImGui::BeginTabItem("Maphack")) {
+					ImGui::BeginGroupPanel("Drone View", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
+                        {
+                            ImGui::PushItemWidth(-1);
+                            ImGui::SliderFloat("##Drone View", &SetFieldOfView, 0, 100, "%.1f");
+                            ImGui::PopItemWidth();
+                            ImGui::Spacing();
+                        }
+                        ImGui::EndGroupPanel();
+                ImGui::Checkbox("Minimap Icon", &Config.MinimapIcon);
+                if (!Config.MinimapIcon) ImGui::BeginDisabled();
+                ImGui::SameLine();
+                ImGui::Checkbox("Hide Line", &Config.HideLine);
+                ImGui::BeginGroup();
+                {
+                    ImGui::BeginGroupPanel("MiniMap Adjustable", ImVec2(-1.0f, 0.0f));
+                   {
+                        ImGui::BeginGroupPanel("Map Position", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
+                        {
+                            ImGui::PushItemWidth(-1);
+                            ImGui::SliderFloat("##MapPosition", &StartPos.x, 0.0f, (float)(screenWidth / 2));
+                            ImGui::PopItemWidth();
+                            ImGui::Spacing();
+                        }
+                        ImGui::EndGroupPanel();
+
+                        ImGui::BeginGroupPanel("Map Size", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
+                        {
+                            ImGui::PushItemWidth(-1);
+                            ImGui::SliderInt("##MapSize", &MapSize, 0, 800);
+                            ImGui::PopItemWidth();
+                            ImGui::Spacing();
+                        }
+                        ImGui::EndGroupPanel();
+
+                        ImGui::BeginGroupPanel("Icon Size", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
+                        {
+                            ImGui::PushItemWidth(-1);
+                            ImGui::SliderInt("##IconSize", &ICSize, 0, 100);
+                            ImGui::PopItemWidth();
+                            ImGui::Spacing();
+                        }
+                        ImGui::EndGroupPanel();
+
+                        ImGui::BeginGroupPanel("Health Thin", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
+                        {
+                            ImGui::PushItemWidth(-1);
+                            ImGui::SliderInt("##HealthThin", &ICHealthThin, 0, 10);
+                            ImGui::PopItemWidth();
+                            ImGui::Spacing();
+                        }
+                        ImGui::EndGroupPanel();
+						
+						ImGui::BeginGroupPanel("Health Color", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
+                        {
+                            ImGui::PushItemWidth(-1);
+                            ImGui::ColorEdit3("##HealthColor", ColorHealth);
+                            ImGui::PopItemWidth();
+                            ImGui::Spacing();
+                        }
+                        ImGui::EndGroupPanel();
+														     
+                        ImGui::Spacing();
+                    }
+                    ImGui::EndGroupPanel();
+                    if (!Config.MinimapIcon) ImGui::EndDisabled();
+                }
+                ImGui::EndGroup();
+                ImGui::EndTabItem();
+            }
+			}
+			
+			static int SelectInfo = 0;
+            static ImGuiTableFlags flags = ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable | ImGuiTableFlags_Hideable | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV;
+            if (ImGui::BeginTabItem("Setting")) {
+                ImGui::BeginGroupPanel("Menu Setting", ImVec2(-1.0f, 0.0f));
+                {
+                    ImGui::Checkbox("Auto Resize", &bFlagAutoResize);
+                    ImGui::BeginGroupPanel("Window Size", ImVec2(-1.0f, 0.0f));
+                    {
+                        ImGui::PushItemWidth(-1);
+                        ImGui::SliderFloat("##Scale", &window_scale, 0.5f, 2.5f, "%.1f");
+                        ImGui::PopItemWidth();
+                        ImGui::Spacing();
+                    }
+                    ImGui::EndGroupPanel();
+                    
+                    if (ImGui::Button("Hide Menu", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+                        isPopUpHide = true;
+                    }
+
+                    ImGui::BeginGroupPanel("English", ImVec2(-1.0f, 0.0f));
+                    {
+                        ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "To display the menu again,");
+                        ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "simply touch on the lower left corner of your screen.");
+                        ImGui::Spacing();
+                    }
+                    ImGui::EndGroupPanel();
+
+                    ImGui::BeginGroupPanel("Indonesia", ImVec2(-1.0f, 0.0f));
+                    {
+                        ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "Untuk menampilkan kembali menu,");
+                        ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "cukup sentuh di pojok kiri bawah layar Anda.");
+                        ImGui::Spacing();
+                    }
+                    ImGui::EndGroupPanel();
+                    
+                    ImGui::Spacing();
+                    
+                    // if (ImGui::Button("Save Cheat Setting", ImVec2(ImGui::GetContentRegionAvail().x / 2, 0))) {
+                    //     saveCFG();
+                    // }
+                    // ImGui::SameLine();
+                    // if (ImGui::Button("Load Cheat Setting", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+                    //     loadCFG();
+                    // }
+					
+        			ImGui::Separator();
+					
+					ImGui::Spacing();
+                    ImGui::BeginGroupPanel("Mood Menu Info", ImVec2(-1.0f, 0.0f));
+                    {
+						Text("Games : "); SameLine();
+                        TextColored(RGBA2ImVec4(176, 40, 40, 255), "Mobile Legends Bang Bang");
+                        Text("Mod Status : "); SameLine();
+                        ImGui::TextColored(RGBA2ImVec4(176, 40, 40, 255), "Free Version");
+
+			       Text("Developer : "); SameLine();
+                        Text("@Dafidxcode");
+                    }
+                    ImGui::EndGroupPanel();
+                }
+                ImGui::EndGroupPanel();
+                ImGui::EndTabItem();
+            }
+			
+			ImGui::EndTabBar();
+		}
+		ImGui::Separator();
+        ImGui::TreePop();
+	}
 }
