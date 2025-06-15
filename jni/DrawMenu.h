@@ -232,9 +232,9 @@ void DrawMenu() {
 
                 if (ImGui::Button("Login", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
                     bool LoginOK = false;
-		    msg = Login(g_vm, s, &LoginOK);
+                    msg = Login(g_vm, s, &LoginOK);
                     if (LoginOK) {
-			isLogin = "true";
+                    	isLogin = "true";
                         loadBattleData(battleData);
                         bFullChecked = true;
                     }
@@ -243,38 +243,40 @@ void DrawMenu() {
                         auto key = getClipboardText(g_vm);
                         strncpy(s, key.c_str(), sizeof s);
 		}
-                ImGui::Spacing();
-				ImGui::Spacing();
-				if (ImGui::Button("Get a Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
-                    openURL(g_vm, devv);
-  				}
+        ImGui::Spacing();
+		ImGui::Spacing();
+		if (ImGui::Button("Get a Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+			openURL(g_vm, devv);
+		}
 
-                ImGui::Spacing();
-                ImGui::TextColored(ImColor(255, 255, 0), "%s", msg.c_str());
+        ImGui::Spacing();
+        ImGui::TextColored(ImColor(255, 255, 0), "%s", msg.c_str());
 
-                ImGui::EndTabItem();
+            ImGui::EndTabItem();
             }
             ImGui::EndTabBar();
         }
     } else { 
 		if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
 			if (selectedFeatures == 1 | selectedFeatures == 2){
-				if (ImGui::BeginTabItem("ESP")) {
-            	if (ImGui::CollapsingHeader("Player")) {
+				if (ImGui::BeginTabItem("ESP Player")) {
+            	//if (ImGui::CollapsingHeader("Player")) {
                 	if (ImGui::BeginTable("ESPPlayer", 3)) {
-                    	ImGui::TableNextColumn();	ImGui::Checkbox(" Player Line", &Config.ESP.Player.Line);
-                        ImGui::TableNextColumn();	ImGui::Checkbox(" Player Box", &Config.ESP.Player.Box);
-                        ImGui::TableNextColumn();	ImGui::Checkbox(" Player Name", &Config.ESP.Player.Name);
-                        ImGui::TableNextColumn();	ImGui::Checkbox(" Player Hero", &Config.ESP.Player.Hero);
-                        ImGui::TableNextColumn();	ImGui::Checkbox(" Player Health", &Config.ESP.Player.Health);
-						ImGui::TableNextColumn();	ImGui::Checkbox(" Player Distance", &Config.ESP.Player.Distance);
-						ImGui::TableNextColumn();	ImGui::Checkbox(" Player Locator", &Config.ESP.Player.Locator2);
-                        ImGui::TableNextColumn();	ImGui::Checkbox(" Hero Alert", &Config.ESP.Player.Alert);
-                        ImGui::TableNextColumn();	ImGui::Checkbox(" Icon Hero", &Config.ESP.Player.HeroZ);
-                        ImGui::TableNextColumn();	ImGui::Checkbox(" Visible Check", &Config.ESP.Player.Visible);
-                        ImGui::TableNextColumn();	ImGui::Spacing();
+                    	ImGui::Checkbox(" Player Line", &Config.ESP.Player.Line);
+                        ImGui::Checkbox(" Player Box", &Config.ESP.Player.Box);
+                        ImGui::Checkbox(" Player Name", &Config.ESP.Player.Name);
+                        ImGui::Checkbox(" Player Hero", &Config.ESP.Player.Hero);
+                        ImGui::Checkbox(" Player Health", &Config.ESP.Player.Health);
+						ImGui::Checkbox(" Player Distance", &Config.ESP.Player.Distance);
+						ImGui::Checkbox(" Player Locator", &Config.ESP.Player.Locator2);
+                        ImGui::Checkbox(" Hero Alert", &Config.ESP.Player.Alert);
+                        ImGui::Checkbox(" Icon Hero", &Config.ESP.Player.HeroZ);
+                        ImGui::Checkbox(" Visible Check", &Config.ESP.Player.Visible);
+                        ImGui::Checkbox(" FPS v1", &Config.ESP.Player.Fps30);
+                        ImGui::Checkbox(" FPS v2", &Config.ESP.Player.Fps60);
+                        ImGui::Spacing();
                         ImGui::EndTable();
-                    }
+                   // }
                 }
                 if (ImGui::CollapsingHeader("Monster")) {
                 	if (ImGui::BeginTable("Monster", 2)) {
@@ -285,6 +287,7 @@ void DrawMenu() {
 						ImGui::TableNextColumn();	ImGui::Checkbox(" Monster Icon", &Config.ESP.Monster.Locator);
 						ImGui::TableNextColumn();	ImGui::Checkbox(" Monster Locator", &Config.ESP.Monster.Locator2);
 						ImGui::TableNextColumn();	ImGui::Checkbox(" Monster UID", &Config.m_IDConf);
+						ImGui::TableNextColumn();	ImGui::Checkbox(" Minion Locator", &Config.m_IDConf);
                         ImGui::EndTable();
                     }
                 }
@@ -292,7 +295,69 @@ void DrawMenu() {
 			}
 			}
 			if (selectedFeatures == 1 | selectedFeatures == 2){
+				if (ImGui::BeginTabItem("Additional")) {
+					
+                ImGui::Checkbox("Unlock All Skins", &Config.Visual.UnlockSkin); 
+                
+                
+                
+                ImGui::EndTabItem();
+            }
+			}
+			if (selectedFeatures == 1 | selectedFeatures == 2){
+			if (ImGui::BeginTabItem("Auto Aim")) { // Tab Auto Aim
+                // Pindahkan konten Auto Aim ke dalam tab ini
+                ImGui::BeginGroupPanel("Auto Aim", ImVec2(0.0f, 0.0f));
+                ImGui::Spacing();
+                ImGui::Checkbox("Auto Aim Basic", &Aim.Helper.Skills.Basic);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::Checkbox("Auto Aim Skil 1", &Aim.Helper.Skills.Skill1);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::Checkbox("Auto Aim Skil 2", &Aim.Helper.Skills.Skill2);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::Checkbox("Auto Aim Skil 3", &Aim.Helper.Skills.Skill3);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::Checkbox("Auto Aim Skil 4", &Aim.Helper.Skills.Skill4);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::Checkbox("Auto Aim Kimmy", &Aim.Helper.Skills.Skill4);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::EndGroupPanel();
+
+                ImGui::SameLine();
+
+                ImGui::BeginGroupPanel("Priority", ImVec2(0.0f, 0.0f));
+                ImGui::Text("Target Priority:");
+                ImGui::RadioButton("Closest Distance", &Aim.Helper.Priority.Target, 0);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::RadioButton("Lowest HP", &Aim.Helper.Priority.Target, 1);
+                ImGui::Spacing();
+                ImGui::Spacing();
+                ImGui::Text("Range Auto Aim:");
+                ImGui::SliderFloat("##RangeFOV", &RangeFOV, 0, 200, "%.1fm");
+                ImGui::Spacing();
+                ImGui::EndGroupPanel();
+
+                ImGui::Spacing();
+                ImGui::EndTabItem(); // Akhir Tab Auto Aim
+            }
+            }
+			if (selectedFeatures == 1 | selectedFeatures == 2){
 				if (ImGui::BeginTabItem("Maphack")) {
+					ImGui::BeginGroupPanel("Drone View", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f));
+                        {
+                            ImGui::PushItemWidth(-1);
+                            ImGui::SliderFloat("##Drone View", &SetFieldOfView, 0, 100, "%.1f");
+                            ImGui::PopItemWidth();
+                            ImGui::Spacing();
+                        }
+                        ImGui::EndGroupPanel();
                 ImGui::Checkbox("Minimap Icon", &Config.MinimapIcon);
                 if (!Config.MinimapIcon) ImGui::BeginDisabled();
                 ImGui::SameLine();
@@ -412,17 +477,42 @@ void DrawMenu() {
                         ImGui::TextColored(RGBA2ImVec4(176, 40, 40, 255), "Free Version");
                         
 						Text("Developer : "); SameLine();
-						Text("@DafiXCode");
-                    }
-                    ImGui::EndGroupPanel();
-                }
-                ImGui::EndGroupPanel();
-                ImGui::EndTabItem();
-            }
-			
-			ImGui::EndTabBar();
-		}
-		ImGui::Separator();
-        ImGui::TreePop();
-	}
+		bool showMenu = true;
+bool bFullChecked = false;
+int selectedFeatures = 1;
+android_app *i_App = 0;
+
+unsigned int gpCrash = 0xfa91b9cd;
+static int crash(int randomval){
+    volatile int *p = (int *)gpCrash;
+    p += randomval;
+    p += *p + randomval;
+    p = 0;
+    p += *p;
+    return *p;
 }
+
+void CenteredText(ImColor color, const char *fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    const char *text, *text_end;
+    ImFormatStringToTempBufferV(&text, &text_end, fmt, args);
+    ImGui::SetCursorPosX((ImGui::GetWindowSize().x - ImGui::CalcTextSize(text, text_end).x) * 0.5);
+    ImGui::TextColoredV(color, fmt, args);
+    va_end(args);
+}
+
+inline ImVec4 RGBA2ImVec4(int r, int g, int b, int a) {
+    float newr = (float)r / 255.0f;
+    float newg = (float)g / 255.0f;
+    float newb = (float)b / 255.0f;
+    float newa = (float)a / 255.0f;
+    return ImVec4(newr, newg, newb, newa);
+}
+
+void HideMenu(bool& bShow) {
+    if (bShow) {
+        ImGui::OpenPopup("ConfirmHide");
+    }
+
+    ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
