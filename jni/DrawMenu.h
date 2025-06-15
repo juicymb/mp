@@ -491,5 +491,3 @@ void DrawMenu() {
         ImGui::TreePop();
 	}
 }
-
-						Text("Developer : "); SameLine();
