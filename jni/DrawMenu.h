@@ -294,7 +294,7 @@ void DrawMenu() {
                 ImGui::EndTabItem();
 			}
 			}
-			/*if (selectedFeatures == 1 | selectedFeatures == 2){
+			//if (selectedFeatures == 1 | selectedFeatures == 2){
 				//if (ImGui::BeginTabItem("Additional")) {
 					
                // ImGui::Checkbox("Unlock All Skins", &Config.Visual.UnlockSkin); 
