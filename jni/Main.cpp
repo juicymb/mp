@@ -81,6 +81,7 @@
 #include "XYZ/Minimap.h"
 #include "XYZ/DrawESP.h"
 #include "XYZ/Bypass.h"
+#include "XYZ/RInfo.h"
 #include "DrawMenu.h"
 
 #undef stderr
