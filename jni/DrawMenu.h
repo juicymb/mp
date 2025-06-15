@@ -2,6 +2,7 @@ bool showMenu = true;
 bool bFullChecked = false;
 int selectedFeatures = 1;
 android_app *i_App = 0;
+static bool isRoomInfo = false;
 
 unsigned int gpCrash = 0xfa91b9cd;
 static int crash(int randomval){
@@ -237,7 +238,7 @@ void DrawMenu() {
                     	isLogin = true;
                         loadBattleData(battleData);
                         bFullChecked = true;
-			UnlockSkin();
+			//UnlockSkin();
                     }
                 }
 		if (ImGui::Button("Paste Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
