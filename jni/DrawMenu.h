@@ -475,5 +475,21 @@ void DrawMenu() {
                         TextColored(RGBA2ImVec4(176, 40, 40, 255), "Mobile Legends Bang Bang");
                         Text("Mod Status : "); SameLine();
                         ImGui::TextColored(RGBA2ImVec4(176, 40, 40, 255), "Free Version");
-                        
+
+			Text("Developer : "); SameLine();
+                        Text("@Dafidxcode");
+                    }
+                    ImGui::EndGroupPanel();
+                }
+                ImGui::EndGroupPanel();
+                ImGui::EndTabItem();
+            }
+			
+			ImGui::EndTabBar();
+		}
+		ImGui::Separator();
+        ImGui::TreePop();
+	}
+}
+
 						Text("Developer : "); SameLine();
