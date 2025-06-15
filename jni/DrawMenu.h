@@ -260,7 +260,7 @@ void DrawMenu() {
 		if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
 			if (selectedFeatures == 1 | selectedFeatures == 2){
 				if (ImGui::BeginTabItem("ESP Player")) {
-            	//if (ImGui::CollapsingHeader("Player")) {
+            	if (ImGui::CollapsingHeader("Player")) {
                 	if (ImGui::BeginTable("ESPPlayer", 3)) {
                     	ImGui::Checkbox(" Player Line", &Config.ESP.Player.Line);
                         ImGui::Checkbox(" Player Box", &Config.ESP.Player.Box);
@@ -276,7 +276,7 @@ void DrawMenu() {
                         ImGui::Checkbox(" FPS v2", &Config.ESP.Player.Fps60);
                         ImGui::Spacing();
                         ImGui::EndTable();
-                   // }
+                    }
                 }
                 if (ImGui::CollapsingHeader("Monster")) {
                 	if (ImGui::BeginTable("Monster", 2)) {
