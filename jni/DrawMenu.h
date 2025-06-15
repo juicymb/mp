@@ -259,22 +259,95 @@ void DrawMenu() {
     } else { 
 		if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
 			if (selectedFeatures == 1 | selectedFeatures == 2){
+				if (ImGui::BeginTabItem("Info Rooms")) {
+					
+                RoomInfoList2();
+                ImGui::TextColored(ImVec4(0.0f, 0.8f, 1.0f, 1.0f), "Team");
+                if (ImGui::BeginTable("##Team", 6, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersInner)) {
+                    ImGui::TableSetupColumn("Name", 0, 150);
+                    ImGui::TableSetupColumn("User ID", 0, 160);
+                    ImGui::TableSetupColumn("Rank", 0, 180);
+                    ImGui::TableSetupColumn("Hero", 0, 130);
+                    ImGui::TableSetupColumn("Spell", 0, 120);
+                    ImGui::TableHeadersRow();
+                    for (int row = 0; row < 5; row++) {
+                        ImGui::TableNextRow();
+                        for (int column = 0; column < 5; column++) {
+                            ImGui::TableSetColumnIndex(column);
+                            char buf[32];
+                            if (column == 0) {
+                                sprintf(buf, "%s", RoomInfo.PlayerB[row].Name.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 1) {
+                                sprintf(buf, "%s", RoomInfo.PlayerB[row].UserID.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 2) {
+                                sprintf(buf, "%s", RoomInfo.PlayerB[row].Rank.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 3) {
+                                sprintf(buf, "%s", RoomInfo.PlayerB[row].Hero.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 4) {
+                                sprintf(buf, "%s", RoomInfo.PlayerB[row].Spell.c_str());
+                                ImGui::TextUnformatted(buf);
+                            }
+                        }
+                    }
+                    ImGui::EndTable();
+                }
+                ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Enemy");
+                if (ImGui::BeginTable("##Enemy", 6, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersInner)) {
+                    ImGui::TableSetupColumn("Name", 0, 150);
+                    ImGui::TableSetupColumn("User ID", 0, 160);
+                    ImGui::TableSetupColumn("Rank", 0, 180);
+                    ImGui::TableSetupColumn("Hero", 0, 130);
+                    ImGui::TableSetupColumn("Spell", 0, 120);
+                    ImGui::TableHeadersRow();
+                    for (int row = 0; row < 5; row++) {
+                        ImGui::TableNextRow();
+                        for (int column = 0; column < 5; column++) {
+                            ImGui::TableSetColumnIndex(column);
+                            char buf[32];
+                            if (column == 0) {
+                                sprintf(buf, "%s", RoomInfo.PlayerR[row].Name.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 1) {
+                                sprintf(buf, "%s", RoomInfo.PlayerR[row].UserID.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 2) {
+                                sprintf(buf, "%s", RoomInfo.PlayerR[row].Rank.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 3) {
+                                sprintf(buf, "%s", RoomInfo.PlayerR[row].Hero.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 4) {
+                                sprintf(buf, "%s", RoomInfo.PlayerR[row].Spell.c_str());
+                                ImGui::TextUnformatted(buf);
+                            }
+                        }
+                    }
+                    ImGui::EndTable();
+                }
+                ImGui::EndTabItem(); // Akhir Tab Info Room
+            
+            }
+			}
+			if (selectedFeatures == 1 | selectedFeatures == 2){
 				if (ImGui::BeginTabItem("ESP Player")) {
             	if (ImGui::CollapsingHeader("Player")) {
                 	if (ImGui::BeginTable("ESPPlayer", 3)) {
-                    	ImGui::Checkbox(" Player Line", &Config.ESP.Player.Line);
-                        ImGui::Checkbox(" Player Box", &Config.ESP.Player.Box);
-                        ImGui::Checkbox(" Player Name", &Config.ESP.Player.Name);
-                        ImGui::Checkbox(" Player Hero", &Config.ESP.Player.Hero);
-                        ImGui::Checkbox(" Player Health", &Config.ESP.Player.Health);
-						ImGui::Checkbox(" Player Distance", &Config.ESP.Player.Distance);
-						ImGui::Checkbox(" Player Locator", &Config.ESP.Player.Locator2);
-                        ImGui::Checkbox(" Hero Alert", &Config.ESP.Player.Alert);
-                        ImGui::Checkbox(" Icon Hero", &Config.ESP.Player.HeroZ);
-                        ImGui::Checkbox(" Visible Check", &Config.ESP.Player.Visible);
-                        ImGui::Checkbox(" FPS v1", &Config.ESP.Player.Fps30);
-                        ImGui::Checkbox(" FPS v2", &Config.ESP.Player.Fps60);
-                        ImGui::Spacing();
+                    	ImGui::TableNextColumn();	(" Player Line", &Config.ESP.Player.Line);
+                        ImGui::TableNextColumn();	(" Player Box", &Config.ESP.Player.Box);
+                        ImGui::TableNextColumn();	(" Player Name", &Config.ESP.Player.Name);
+                        ImGui::TableNextColumn();	(" Player Hero", &Config.ESP.Player.Hero);
+                        ImGui::TableNextColumn();	(" Player Health", &Config.ESP.Player.Health);
+						ImGui::TableNextColumn();	(" Player Distance", &Config.ESP.Player.Distance);
+						ImGui::TableNextColumn();	(" Player Locator", &Config.ESP.Player.Locator2);
+                        ImGui::TableNextColumn();	(" Hero Alert", &Config.ESP.Player.Alert);
+                        ImGui::TableNextColumn();	(" Icon Hero", &Config.ESP.Player.HeroZ);
+                        ImGui::TableNextColumn();	(" Visible Check", &Config.ESP.Player.Visible);
+                        ImGui::TableNextColumn();	(" FPS v1", &Config.ESP.Player.Fps30);
+                        ImGui::TableNextColumn();	(" FPS v2", &Config.ESP.Player.Fps60);
                         ImGui::EndTable();
                     }
                 }
@@ -324,13 +397,8 @@ void DrawMenu() {
                 ImGui::Checkbox("Auto Aim Skil 4", &Aim.Helper.Skills.Skill4);
                 ImGui::Spacing();
                 ImGui::Spacing();
-                ImGui::Checkbox("Auto Aim Kimmy", &Aim.Helper.Skills.Skill4);
-                ImGui::Spacing();
-                ImGui::Spacing();
                 ImGui::EndGroupPanel();
-
                 ImGui::SameLine();
-
                 ImGui::BeginGroupPanel("Priority", ImVec2(0.0f, 0.0f));
                 ImGui::Text("Target Priority:");
                 ImGui::RadioButton("Closest Distance", &Aim.Helper.Priority.Target, 0);
@@ -416,78 +484,4 @@ void DrawMenu() {
                     ImGui::EndGroupPanel();
                     if (!Config.MinimapIcon) ImGui::EndDisabled();
                 }
-                ImGui::EndGroup();
-                ImGui::EndTabItem();
-            }
-			}
-			
-			static int SelectInfo = 0;
-            static ImGuiTableFlags flags = ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable | ImGuiTableFlags_Hideable | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV;
-            if (ImGui::BeginTabItem("Setting")) {
-                ImGui::BeginGroupPanel("Menu Setting", ImVec2(-1.0f, 0.0f));
-                {
-                    ImGui::Checkbox("Auto Resize", &bFlagAutoResize);
-                    ImGui::BeginGroupPanel("Window Size", ImVec2(-1.0f, 0.0f));
-                    {
-                        ImGui::PushItemWidth(-1);
-                        ImGui::SliderFloat("##Scale", &window_scale, 0.5f, 2.5f, "%.1f");
-                        ImGui::PopItemWidth();
-                        ImGui::Spacing();
-                    }
-                    ImGui::EndGroupPanel();
-                    
-                    if (ImGui::Button("Hide Menu", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
-                        isPopUpHide = true;
-                    }
-
-                    ImGui::BeginGroupPanel("English", ImVec2(-1.0f, 0.0f));
-                    {
-                        ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "To display the menu again,");
-                        ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "simply touch on the lower left corner of your screen.");
-                        ImGui::Spacing();
-                    }
-                    ImGui::EndGroupPanel();
-
-                    ImGui::BeginGroupPanel("Indonesia", ImVec2(-1.0f, 0.0f));
-                    {
-                        ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "Untuk menampilkan kembali menu,");
-                        ImGui::TextColored(RGBA2ImVec4(255, 255, 0, 255), "cukup sentuh di pojok kiri bawah layar Anda.");
-                        ImGui::Spacing();
-                    }
-                    ImGui::EndGroupPanel();
-                    
-                    ImGui::Spacing();
-                    
-                    // if (ImGui::Button("Save Cheat Setting", ImVec2(ImGui::GetContentRegionAvail().x / 2, 0))) {
-                    //     saveCFG();
-                    // }
-                    // ImGui::SameLine();
-                    // if (ImGui::Button("Load Cheat Setting", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
-                    //     loadCFG();
-                    // }
-					
-        			ImGui::Separator();
-					
-					ImGui::Spacing();
-                    ImGui::BeginGroupPanel("Mood Menu Info", ImVec2(-1.0f, 0.0f));
-                    {
-						Text("Games : "); SameLine();
-                        TextColored(RGBA2ImVec4(176, 40, 40, 255), "Mobile Legends Bang Bang");
-                        Text("Mod Status : "); SameLine();
-                        ImGui::TextColored(RGBA2ImVec4(176, 40, 40, 255), "Free Version");
-
-			Text("Developer : "); SameLine();
-                        Text("@Dafidxcode");
-                    }
-                    ImGui::EndGroupPanel();
-                }
-                ImGui::EndGroupPanel();
-                ImGui::EndTabItem();
-            }
-			
-			ImGui::EndTabBar();
-		}
-		ImGui::Separator();
-        ImGui::TreePop();
-	}
-}
+            
