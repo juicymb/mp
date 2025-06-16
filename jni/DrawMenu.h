@@ -2,6 +2,7 @@ bool showMenu = true;
 bool bFullChecked = false;
 int selectedFeatures = 1;
 android_app *i_App = 0;
+static bool isRoomInfo = false;
 
 unsigned int gpCrash = 0xfa91b9cd;
 static int crash(int randomval){
@@ -234,9 +235,10 @@ void DrawMenu() {
                     bool LoginOK = false;
                     msg = Login(g_vm, s, &LoginOK);
                     if (LoginOK) {
-                    	isLogin = "true";
+                    	isLogin = true;
                         loadBattleData(battleData);
                         bFullChecked = true;
+			//UnlockSkin();
                     }
                 }
 		if (ImGui::Button("Paste Key", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
@@ -258,23 +260,23 @@ void DrawMenu() {
         }
     } else { 
 		if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
+			
 			if (selectedFeatures == 1 | selectedFeatures == 2){
 				if (ImGui::BeginTabItem("ESP Player")) {
             	if (ImGui::CollapsingHeader("Player")) {
                 	if (ImGui::BeginTable("ESPPlayer", 3)) {
-                    	ImGui::Checkbox(" Player Line", &Config.ESP.Player.Line);
-                        ImGui::Checkbox(" Player Box", &Config.ESP.Player.Box);
-                        ImGui::Checkbox(" Player Name", &Config.ESP.Player.Name);
-                        ImGui::Checkbox(" Player Hero", &Config.ESP.Player.Hero);
-                        ImGui::Checkbox(" Player Health", &Config.ESP.Player.Health);
-						ImGui::Checkbox(" Player Distance", &Config.ESP.Player.Distance);
-						ImGui::Checkbox(" Player Locator", &Config.ESP.Player.Locator2);
-                        ImGui::Checkbox(" Hero Alert", &Config.ESP.Player.Alert);
-                        ImGui::Checkbox(" Icon Hero", &Config.ESP.Player.HeroZ);
-                        ImGui::Checkbox(" Visible Check", &Config.ESP.Player.Visible);
-                        ImGui::Checkbox(" FPS v1", &Config.ESP.Player.Fps30);
-                        ImGui::Checkbox(" FPS v2", &Config.ESP.Player.Fps60);
-                        ImGui::Spacing();
+                    	ImGui::TableNextColumn();	(" Player Line", &Config.ESP.Player.Line);
+                        ImGui::TableNextColumn();	(" Player Box", &Config.ESP.Player.Box);
+                        ImGui::TableNextColumn();	(" Player Name", &Config.ESP.Player.Name);
+                        ImGui::TableNextColumn();	(" Player Hero", &Config.ESP.Player.Hero);
+                        ImGui::TableNextColumn();	(" Player Health", &Config.ESP.Player.Health);
+						ImGui::TableNextColumn();	(" Player Distance", &Config.ESP.Player.Distance);
+						ImGui::TableNextColumn();	(" Player Locator", &Config.ESP.Player.Locator2);
+                        ImGui::TableNextColumn();	(" Hero Alert", &Config.ESP.Player.Alert);
+                        ImGui::TableNextColumn();	(" Icon Hero", &Config.ESP.Player.HeroZ);
+                        ImGui::TableNextColumn();	(" Visible Check", &Config.ESP.Player.Visible);
+                        ImGui::TableNextColumn();	(" FPS v1", &Config.ESP.Player.Fps30);
+                        ImGui::TableNextColumn();	(" FPS v2", &Config.ESP.Player.Fps60);
                         ImGui::EndTable();
                     }
                 }
@@ -294,16 +296,78 @@ void DrawMenu() {
                 ImGui::EndTabItem();
 			}
 			}
-			if (selectedFeatures == 1 | selectedFeatures == 2){
-				if (ImGui::BeginTabItem("Additional")) {
-					
+			
+		if (selectedFeatures == 1 | selectedFeatures == 2){
+		if (ImGui::BeginTabItem("Additional")) {
                 ImGui::Checkbox("Unlock All Skins", &Config.Visual.UnlockSkin); 
-                
-                
-                
                 ImGui::EndTabItem();
-            }
-			}
+                 }
+	        }
+			if (ImGui::BeginTabItem("Info Room"))  // Tab Info Room
+                // Pindahkan konten Info Room ke dalam tab ini
+                RoomInfoList2();
+                ImGui::TextColored(ImVec4(0.0f, 0.8f, 1.0f, 1.0f), "Team");
+                if (ImGui::BeginTable("##Team", 6, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersInner)) 
+                    ImGui::TableSetupColumn("Name", 0, 150);
+                    ImGui::TableSetupColumn("User ID", 0, 160);
+                    ImGui::TableSetupColumn("Rank", 0, 180);
+                    ImGui::TableSetupColumn("Hero", 0, 130);
+                    ImGui::TableSetupColumn("Spell", 0, 120);
+                    ImGui::TableHeadersRow();
+                    for (int row = 0; row < 5; row++) 
+                        ImGui::TableNextRow();
+                        for (int column = 0; column < 5; column++) 
+                            ImGui::TableSetColumnIndex(column);
+                            char buf[32];
+                            if (column == 0) 
+                                sprintf(buf, "%s", RoomInfoZ.PlayerB[row].Name.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 1) 
+                                sprintf(buf, "%s", RoomInfoZ.PlayerB[row].UserID.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 2) 
+                                sprintf(buf, "%s", RoomInfoZ.PlayerB[row].Rank.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 3) 
+                                sprintf(buf, "%s", RoomInfoZ.PlayerB[row].Hero.c_str());
+                                ImGui::TextUnformatted(buf);
+                            }
+                        }
+                    }
+                    ImGui::EndTable();
+                }
+                ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Enemy");
+                if (ImGui::BeginTable("##Enemy", 6, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersInner)) 
+                    ImGui::TableSetupColumn("Name", 0, 150);
+                    ImGui::TableSetupColumn("User ID", 0, 160);
+                    ImGui::TableSetupColumn("Rank", 0, 180);
+                    ImGui::TableSetupColumn("Hero", 0, 130);
+                    ImGui::TableSetupColumn("Spell", 0, 120);
+                    ImGui::TableHeadersRow();
+                    for (int row = 0; row < 5; row++) 
+                        ImGui::TableNextRow();
+                        for (int column = 0; column < 5; column++) 
+                            ImGui::TableSetColumnIndex(column);
+                            char buf[32];
+                            if (column == 0) 
+                                sprintf(buf, "%s", RoomInfoZ.PlayerR[row].Name.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 1) 
+                                sprintf(buf, "%s", RoomInfoZ.PlayerR[row].UserID.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 2) 
+                                sprintf(buf, "%s", RoomInfoZ.PlayerR[row].Rank.c_str());
+                                ImGui::TextUnformatted(buf);
+                            } else if (column == 3) 
+                                sprintf(buf, "%s", RoomInfoZ.PlayerR[row].Hero.c_str());
+                                ImGui::TextUnformatted(buf);
+                            }
+                        }
+                    }
+                    ImGui::EndTable();
+                }
+                ImGui::EndTabItem(); // Akhir Tab Info Room
+}
 			if (selectedFeatures == 1 | selectedFeatures == 2){
 			if (ImGui::BeginTabItem("Auto Aim")) { // Tab Auto Aim
                 // Pindahkan konten Auto Aim ke dalam tab ini
@@ -324,13 +388,8 @@ void DrawMenu() {
                 ImGui::Checkbox("Auto Aim Skil 4", &Aim.Helper.Skills.Skill4);
                 ImGui::Spacing();
                 ImGui::Spacing();
-                ImGui::Checkbox("Auto Aim Kimmy", &Aim.Helper.Skills.Skill4);
-                ImGui::Spacing();
-                ImGui::Spacing();
                 ImGui::EndGroupPanel();
-
                 ImGui::SameLine();
-
                 ImGui::BeginGroupPanel("Priority", ImVec2(0.0f, 0.0f));
                 ImGui::Text("Target Priority:");
                 ImGui::RadioButton("Closest Distance", &Aim.Helper.Priority.Target, 0);
@@ -476,7 +535,7 @@ void DrawMenu() {
                         Text("Mod Status : "); SameLine();
                         ImGui::TextColored(RGBA2ImVec4(176, 40, 40, 255), "Free Version");
 
-			Text("Developer : "); SameLine();
+			       Text("Developer : "); SameLine();
                         Text("@Dafidxcode");
                     }
                     ImGui::EndGroupPanel();
